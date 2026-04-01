@@ -2,6 +2,7 @@
 
 @theme {
   --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-serif: var(--font-serif), Georgia, serif;
   --font-mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
   --color-border: var(--color-slate-200);
@@ -54,4 +55,8 @@
 
 .github-badge {
   @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-mono font-medium bg-slate-100 text-slate-800 border border-slate-200;
+}
+
+.writing-mode-vertical {
+  writing-mode: vertical-rl;
 }

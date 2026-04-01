@@ -1,34 +1,11 @@
 import Link from 'next/link';
 import { ArrowRight, Play, Search, Bot, Code, CheckCircle2, Zap, ShieldCheck, Users, Star } from 'lucide-react';
+import Hero from '@/components/Hero';
 
 export default function Home() {
   return (
     <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative pt-20 pb-32 text-center px-4 md:px-6">
-        <div className="container mx-auto max-w-4xl">
-          <div className="github-badge mb-8">
-            <Zap className="mr-2 h-3 w-3" />
-            AI-POWERED BUSINESS GROWTH PLATFORM
-          </div>
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight">
-            Transform Your Business with Intelligent Automation
-          </h1>
-          <p className="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-            VyntRise combines AI-driven reputation management, intelligent automation, and custom software solutions to help businesses scale faster and smarter.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/contact" className="inline-flex h-12 items-center justify-center rounded-md bg-blue-600 px-8 text-base font-medium text-white hover:bg-blue-700 transition-colors w-full sm:w-auto">
-              Book a Demo
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-            <Link href="#" className="inline-flex h-12 items-center justify-center rounded-md border border-slate-200 bg-white px-8 text-base font-medium text-slate-900 hover:bg-slate-50 transition-colors w-full sm:w-auto">
-              <Play className="mr-2 h-4 w-4" />
-              Watch Demo
-            </Link>
-          </div>
-        </div>
-      </section>
+      <Hero />
 
       {/* Trusted By */}
       <section className="border-y border-slate-100 bg-slate-50/50 py-10">
