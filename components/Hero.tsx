@@ -2,142 +2,155 @@
 
 import Link from 'next/link';
 import { motion } from 'motion/react';
-import { ArrowRight, Zap, Globe, Cpu, Activity } from 'lucide-react';
+import { ArrowRight, ChevronRight, Sparkles } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section className="relative h-screen flex flex-col lg:flex-row overflow-hidden bg-[#f5f5f4]">
-      {/* Left Pane: Editorial Content */}
-      <div className="flex-1 flex flex-col justify-center p-8 lg:p-24 relative z-10 border-r border-slate-200">
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-2xl"
+    <section className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden bg-white px-4 text-center">
+
+      {/* Background gradient mesh */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute left-1/2 top-0 -translate-x-1/2 h-[600px] w-[900px] rounded-full bg-[radial-gradient(ellipse_at_top,_#dbeafe_0%,_transparent_70%)] opacity-70 blur-3xl" />
+        <div className="absolute left-1/4 bottom-0 h-[400px] w-[600px] rounded-full bg-[radial-gradient(ellipse_at_bottom,_#ede9fe_0%,_transparent_70%)] opacity-50 blur-3xl" />
+        {/* Subtle dot grid */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle,_#94a3b820_1px,_transparent_1px)] bg-[size:28px_28px]" />
+      </div>
+
+      {/* Announcement badge */}
+      <motion.div
+        initial={{ opacity: 0, y: -12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+      >
+        <Link
+          href="/services/ai-search"
+          className="group mb-8 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-4 py-1.5 text-sm text-slate-600 shadow-sm backdrop-blur-sm hover:border-slate-300 transition-colors"
         >
-          <div className="flex items-center gap-4 mb-12">
-            <div className="h-px w-12 bg-slate-900" />
-            <span className="text-[10px] font-bold tracking-[0.4em] uppercase text-slate-400">VyntRise AI Platform // v3.1</span>
+          <span className="flex items-center gap-1.5 rounded-full bg-blue-600 px-2 py-0.5 text-[11px] font-semibold text-white">
+            <Sparkles className="h-3 w-3" /> New
+          </span>
+          Introducing AI-powered reputation management
+          <ChevronRight className="h-4 w-4 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
+        </Link>
+      </motion.div>
+
+      {/* Headline */}
+      <motion.h1
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-4xl text-5xl font-extrabold tracking-tight text-slate-900 sm:text-6xl md:text-7xl leading-[1.05]"
+      >
+        Scale your business with{' '}
+        <span className="bg-gradient-to-r from-blue-600 via-violet-600 to-blue-500 bg-clip-text text-transparent">
+          intelligent AI
+        </span>
+      </motion.h1>
+
+      {/* Subheadline */}
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        className="mt-6 max-w-2xl text-lg text-slate-500 leading-relaxed"
+      >
+        VyntRise automates your operations, protects your reputation, and drives measurable growth — so your team can focus on what actually matters.
+      </motion.p>
+
+      {/* CTAs */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        className="mt-10 flex flex-col sm:flex-row items-center gap-4"
+      >
+        <Link
+          href="/contact"
+          className="group inline-flex items-center gap-2 rounded-lg bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-blue-700 transition-colors"
+        >
+          Get started free
+          <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
+        </Link>
+        <Link
+          href="/services"
+          className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50 transition-colors"
+        >
+          See how it works
+        </Link>
+      </motion.div>
+
+      {/* Social proof */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+        className="mt-16 flex flex-col items-center gap-4"
+      >
+        <div className="flex -space-x-2">
+          {['bg-blue-400', 'bg-violet-400', 'bg-emerald-400', 'bg-amber-400', 'bg-rose-400'].map((color, i) => (
+            <div
+              key={i}
+              className={`h-8 w-8 rounded-full border-2 border-white ${color}`}
+            />
+          ))}
+        </div>
+        <p className="text-sm text-slate-500">
+          Trusted by <span className="font-semibold text-slate-800">500+ businesses</span> worldwide
+        </p>
+      </motion.div>
+
+      {/* Product preview card */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+        className="mt-16 w-full max-w-3xl"
+      >
+        <div className="rounded-2xl border border-slate-200 bg-white shadow-xl shadow-slate-200/60 overflow-hidden">
+          {/* Fake browser chrome */}
+          <div className="flex items-center gap-2 border-b border-slate-100 bg-slate-50 px-4 py-3">
+            <div className="h-3 w-3 rounded-full bg-red-400" />
+            <div className="h-3 w-3 rounded-full bg-amber-400" />
+            <div className="h-3 w-3 rounded-full bg-emerald-400" />
+            <div className="mx-auto flex items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-1 text-xs text-slate-400">
+              <span className="h-2 w-2 rounded-full bg-emerald-400" />
+              app.vyntrise.com
+            </div>
           </div>
-
-          <h1 className="text-[14vw] lg:text-[120px] leading-[0.82] tracking-[-0.05em] font-black text-slate-900 mb-12 uppercase">
-            SCALE <br />
-            <span className="font-serif italic font-light text-blue-600 lowercase tracking-normal">smarter</span> <br />
-            BEYOND.
-          </h1>
-
-          <p className="text-xl text-slate-500 max-w-md leading-relaxed mb-12 font-medium">
-            The next generation of business intelligence. Automate, optimize, and scale with precision-engineered AI solutions.
-          </p>
-
-          <div className="flex items-center gap-12">
-            <Link 
-              href="/contact" 
-              className="group relative flex items-center justify-center w-32 h-32 rounded-full border border-slate-900 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-slate-900 hover:text-white transition-all duration-700 ease-[0.16, 1, 0.3, 1]"
-            >
-              <span className="relative z-10">Start</span>
-              <ArrowRight className="absolute right-[-16px] h-5 w-5 text-slate-900 group-hover:translate-x-4 transition-transform duration-700" />
-            </Link>
-            
-            <div className="hidden md:block">
-              <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-slate-300 mb-4">Network Status</p>
-              <div className="flex items-center gap-4">
-                <div className="flex -space-x-2">
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} className="h-8 w-8 rounded-full border-2 border-[#f5f5f4] bg-slate-200" />
-                  ))}
-                </div>
-                <span className="text-[10px] font-bold text-slate-900">500+ NODES ACTIVE</span>
+          {/* Dashboard mockup */}
+          <div className="grid grid-cols-3 gap-4 p-6 bg-slate-50/50">
+            {[
+              { label: 'Reputation Score', value: '94', delta: '+12%', color: 'text-emerald-600' },
+              { label: 'Automations Run', value: '1,284', delta: '+340 today', color: 'text-blue-600' },
+              { label: 'Avg. ROI', value: '3.5x', delta: 'this quarter', color: 'text-violet-600' },
+            ].map((stat) => (
+              <div key={stat.label} className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+                <p className="text-xs text-slate-400 mb-1">{stat.label}</p>
+                <p className={`text-2xl font-bold ${stat.color}`}>{stat.value}</p>
+                <p className="text-xs text-slate-400 mt-1">{stat.delta}</p>
+              </div>
+            ))}
+            <div className="col-span-3 rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+              <p className="text-xs text-slate-400 mb-3">Activity — last 7 days</p>
+              <div className="flex items-end gap-1.5 h-12">
+                {[40, 65, 50, 80, 60, 90, 75].map((h, i) => (
+                  <div
+                    key={i}
+                    className="flex-1 rounded-sm bg-blue-100"
+                    style={{ height: `${h}%` }}
+                  >
+                    <div
+                      className="w-full rounded-sm bg-blue-500"
+                      style={{ height: `${h * 0.6}%` }}
+                    />
+                  </div>
+                ))}
               </div>
             </div>
           </div>
-        </motion.div>
-
-        {/* Vertical Rail Text */}
-        <div className="absolute left-8 bottom-24 hidden lg:block">
-          <p className="writing-mode-vertical rotate-180 text-[9px] font-bold uppercase tracking-[0.6em] text-slate-300">
-            EST. 2024 — BUILT FOR AUTONOMOUS GROWTH
-          </p>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Right Pane: Immersive Visual */}
-      <div className="flex-1 bg-slate-900 relative overflow-hidden flex items-center justify-center">
-        {/* Abstract Background Grid */}
-        <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
-        
-        {/* Atmospheric Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-[radial-gradient(circle_at_center,#3b82f615_0%,transparent_70%)] blur-3xl animate-pulse" />
-
-        {/* Central Interactive Core */}
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-10"
-        >
-          {/* Main Bubble */}
-          <motion.div
-            animate={{ 
-              y: [0, -30, 0],
-              rotate: [-4, 4, -4]
-            }}
-            transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
-            className="w-80 h-80 rounded-full border border-white/10 backdrop-blur-3xl bg-white/5 flex flex-col items-center justify-center p-12 text-center shadow-[0_0_100px_rgba(59,130,246,0.1)]"
-          >
-            <div className="relative mb-8">
-              <Cpu className="h-16 w-16 text-blue-400" />
-              <motion.div 
-                animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
-                transition={{ repeat: Infinity, duration: 2 }}
-                className="absolute inset-0 bg-blue-400 rounded-full blur-xl -z-10" 
-              />
-            </div>
-            
-            <h3 className="text-white font-black text-2xl mb-2 tracking-tighter uppercase">Neural Core</h3>
-            <p className="text-white/30 text-[9px] leading-relaxed uppercase tracking-[0.3em] font-bold">
-              Processing 1.2M+ <br /> ops / sec
-            </p>
-            
-            {/* Orbiting Elements */}
-            <div className="absolute inset-[-40px] border border-dashed border-white/5 rounded-full animate-[spin_30s_linear_infinite]" />
-            <div className="absolute inset-[-80px] border border-white/5 rounded-full animate-[spin_45s_linear_infinite_reverse]" />
-          </motion.div>
-
-          {/* Floating Status Cards */}
-          <motion.div
-            animate={{ x: [0, 10, 0], y: [0, -10, 0] }}
-            transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-            className="absolute -top-12 -right-12 bg-white/10 backdrop-blur-md border border-white/10 p-4 rounded-2xl"
-          >
-            <Activity className="h-5 w-5 text-emerald-400 mb-2" />
-            <div className="text-[10px] font-bold text-white uppercase tracking-widest">Uptime</div>
-            <div className="text-lg font-black text-white">99.99%</div>
-          </motion.div>
-
-          <motion.div
-            animate={{ x: [0, -10, 0], y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 7, ease: "easeInOut" }}
-            className="absolute -bottom-12 -left-12 bg-white/10 backdrop-blur-md border border-white/10 p-4 rounded-2xl"
-          >
-            <Globe className="h-5 w-5 text-blue-400 mb-2" />
-            <div className="text-[10px] font-bold text-white uppercase tracking-widest">Global Node</div>
-            <div className="text-lg font-black text-white">LHR-01</div>
-          </motion.div>
-        </motion.div>
-
-        {/* Bottom Status Bar */}
-        <div className="absolute bottom-12 right-12 flex flex-col items-end space-y-4">
-          <div className="flex items-center gap-3">
-            <span className="text-[9px] font-bold text-blue-400 uppercase tracking-[0.4em]">Autonomous Mode Active</span>
-            <div className="h-1.5 w-1.5 rounded-full bg-blue-400 animate-ping" />
-          </div>
-          <div className="flex gap-4">
-            <p className="text-white/20 font-mono text-[9px] tracking-widest">CPU_LOAD: 12.4%</p>
-            <p className="text-white/20 font-mono text-[9px] tracking-widest">MEM_USAGE: 4.2GB</p>
-          </div>
-        </div>
-      </div>
     </section>
   );
 }

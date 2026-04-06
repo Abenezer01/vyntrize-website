@@ -60,3 +60,48 @@
 .writing-mode-vertical {
   writing-mode: vertical-rl;
 }
+
+/* Legal page prose styles */
+.prose-legal h2 {
+  @apply text-xl font-extrabold text-slate-900 mt-12 mb-4 first:mt-0 scroll-mt-28;
+}
+.prose-legal h3 {
+  @apply text-base font-bold text-slate-800 mt-6 mb-2;
+}
+.prose-legal p {
+  @apply text-sm text-slate-600 leading-relaxed mb-4;
+}
+.prose-legal ul {
+  @apply space-y-2 mb-4 pl-0;
+}
+.prose-legal ul li {
+  @apply flex items-start gap-2.5 text-sm text-slate-600;
+}
+.prose-legal ul li::before {
+  content: '';
+  @apply mt-2 h-1.5 w-1.5 rounded-full bg-blue-400 shrink-0;
+}
+.prose-legal a {
+  @apply text-blue-600 hover:text-blue-700 underline underline-offset-2;
+}
+.prose-legal .callout {
+  @apply rounded-xl border border-blue-100 bg-blue-50 px-5 py-4 mb-6;
+}
+.prose-legal .callout p {
+  @apply text-sm text-blue-800 mb-0;
+}
+.prose-legal .callout-label {
+  @apply text-[10px] font-bold uppercase tracking-widest text-blue-500 mb-1;
+}
+.prose-legal .section-divider {
+  @apply border-t border-slate-100 mt-12 mb-12;
+}
+.prose-legal table {
+  @apply w-full text-sm border-collapse mb-6;
+}
+.prose-legal th {
+  @apply text-left text-[10px] font-bold uppercase tracking-wider text-slate-400 border-b border-slate-200 pb-2 pr-4;
+}
+.prose-legal td {
+  @apply text-slate-600 border-b border-slate-100 py-2.5 pr-4 align-top;
+}

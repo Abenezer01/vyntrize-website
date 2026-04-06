@@ -1,173 +1,293 @@
-import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, Instagram } from 'lucide-react';
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+import { motion } from 'motion/react';
+import {
+  ArrowRight, Mail, MessageSquare, Clock, CheckCircle2,
+  Linkedin, Twitter, Github, Search, Bot, Code, Database, Sparkles
+} from 'lucide-react';
+
+const intents = [
+  { id: 'ai-search', label: 'AI Search & Reputation', icon: Search },
+  { id: 'automation', label: 'Intelligent Automation', icon: Bot },
+  { id: 'custom-software', label: 'Custom Software', icon: Code },
+  { id: 'data', label: 'Data & Analytics', icon: Database },
+  { id: 'marketing', label: 'Digital Marketing', icon: Sparkles },
+  { id: 'other', label: 'Something else', icon: MessageSquare },
+];
+
+const nextSteps = [
+  { step: '01', title: 'We review your message', detail: 'A real human reads every submission — usually within a few hours.' },
+  { step: '02', title: 'Discovery call', detail: 'We schedule a 30-min call to understand your goals and constraints.' },
+  { step: '03', title: 'Concrete proposal', detail: 'You get a scoped plan with timeline and pricing — no vague estimates.' },
+];
+
+const trust = [
+  { value: '< 4h', label: 'Avg. first response' },
+  { value: '500+', label: 'Businesses helped' },
+  { value: '14-day', label: 'Free trial on all plans' },
+];
 
 export default function Contact() {
+  const [selected, setSelected] = useState<string | null>(null);
+  const [submitted, setSubmitted] = useState(false);
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setSubmitted(true);
+  }
+
   return (
-    <div className="flex flex-col">
-      {/* Hero */}
-      <section className="bg-blue-50/50 pt-20 pb-24 text-center px-4 md:px-6">
-        <div className="container mx-auto max-w-4xl">
-          <div className="github-badge mb-6">
-            GET IN TOUCH
-          </div>
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight">
-            Let&apos;s Build Something Great Together
+    <div className="flex flex-col min-h-screen bg-white">
+
+      {/* Header */}
+      <section className="border-b border-slate-100 bg-slate-50/60 pt-20 pb-12 px-4 md:px-6">
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <div className="absolute left-1/2 top-0 -translate-x-1/2 h-[400px] w-[700px] rounded-full bg-[radial-gradient(ellipse_at_top,_#dbeafe_0%,_transparent_70%)] opacity-60 blur-3xl" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle,_#94a3b818_1px,_transparent_1px)] bg-[size:28px_28px]" />
+        </div>
+        <div className="container mx-auto max-w-6xl">
+          <div className="github-badge mb-4">CONTACT</div>
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-3 leading-tight">
+            Let&apos;s talk about your goals
           </h1>
-          <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
-            Have a question or ready to transform your business? Our team is here to help. Reach out and we&apos;ll respond within 24 hours.
+          <p className="text-lg text-slate-500 max-w-xl">
+            Tell us what you&apos;re working on. We&apos;ll come back with a concrete plan — not a sales pitch.
           </p>
         </div>
       </section>
 
-      {/* Contact Content */}
-      <section className="py-24 px-4 md:px-6">
+      {/* Main layout */}
+      <section className="flex-1 px-4 md:px-6 pb-20">
         <div className="container mx-auto max-w-6xl">
-          <div className="grid lg:grid-cols-5 gap-12">
-            
+          <div className="grid lg:grid-cols-[1fr_380px] gap-10 items-start">
+
             {/* Form */}
-            <div className="lg:col-span-3">
-              <div className="notion-card">
-                <h2 className="text-2xl font-bold text-slate-900 mb-6">Send Us a Message</h2>
-                <p className="text-slate-600 mb-8">Fill out the form below and our team will get back to you as soon as possible.</p>
-                
-                <form className="space-y-6">
-                  <div className="grid sm:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label htmlFor="firstName" className="text-sm font-medium text-slate-900">First Name *</label>
-                      <input type="text" id="firstName" className="w-full rounded-md border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600" placeholder="John" />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="lastName" className="text-sm font-medium text-slate-900">Last Name *</label>
-                      <input type="text" id="lastName" className="w-full rounded-md border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600" placeholder="Doe" />
-                    </div>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden"
+            >
+              {submitted ? (
+                <div className="flex flex-col items-center justify-center py-24 px-8 text-center">
+                  <div className="h-14 w-14 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center mb-5">
+                    <CheckCircle2 className="h-7 w-7 text-emerald-500" />
                   </div>
-                  
-                  <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-medium text-slate-900">Email Address *</label>
-                    <input type="email" id="email" className="w-full rounded-md border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600" placeholder="john@company.com" />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <label htmlFor="company" className="text-sm font-medium text-slate-900">Company Name</label>
-                    <input type="text" id="company" className="w-full rounded-md border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600" placeholder="Your Company" />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <label htmlFor="service" className="text-sm font-medium text-slate-900">Service Interested In *</label>
-                    <select id="service" className="w-full rounded-md border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600 text-slate-500">
-                      <option value="">Select a service...</option>
-                      <option value="ai-search">AI Search & Reputation</option>
-                      <option value="automation">Intelligent Automation</option>
-                      <option value="custom-software">Custom Software</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium text-slate-900">Message *</label>
-                    <textarea id="message" rows={5} className="w-full rounded-md border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600" placeholder="Tell us about your project or needs..."></textarea>
-                  </div>
-                  
-                  <div className="flex items-start gap-3">
-                    <input type="checkbox" id="privacy" className="mt-1 h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-600" />
-                    <label htmlFor="privacy" className="text-sm text-slate-600">
-                      I agree to the Privacy Policy and Terms of Service
-                    </label>
-                  </div>
-                  
-                  <button type="button" className="w-full rounded-md bg-slate-900 py-3 text-center font-medium text-white hover:bg-slate-800 transition-colors">
-                    Send Message
+                  <h2 className="text-2xl font-extrabold text-slate-900 mb-2">Message sent</h2>
+                  <p className="text-slate-500 text-sm max-w-sm mb-8">
+                    We&apos;ll review your message and get back to you within a few hours. Check your inbox.
+                  </p>
+                  <button
+                    onClick={() => setSubmitted(false)}
+                    className="text-sm font-semibold text-blue-600 hover:text-blue-700"
+                  >
+                    Send another message
                   </button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="p-7 space-y-6">
+                  {/* Intent chips */}
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">
+                      What are you interested in?
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {intents.map((intent) => {
+                        const IIcon = intent.icon;
+                        const active = selected === intent.id;
+                        return (
+                          <button
+                            key={intent.id}
+                            type="button"
+                            onClick={() => setSelected(intent.id)}
+                            className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all ${active
+                              ? 'border-blue-600 bg-blue-600 text-white shadow-sm'
+                              : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50'
+                              }`}
+                          >
+                            <IIcon className="h-3.5 w-3.5" />
+                            {intent.label}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Name row */}
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div className="space-y-1.5">
+                      <label htmlFor="firstName" className="text-xs font-semibold text-slate-700">First name</label>
+                      <input
+                        type="text" id="firstName" required
+                        placeholder="Alex"
+                        className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
+                      />
+                    </div>
+                    <div className="space-y-1.5">
+                      <label htmlFor="lastName" className="text-xs font-semibold text-slate-700">Last name</label>
+                      <input
+                        type="text" id="lastName" required
+                        placeholder="Rivera"
+                        className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Email + Company */}
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div className="space-y-1.5">
+                      <label htmlFor="email" className="text-xs font-semibold text-slate-700">Work email</label>
+                      <input
+                        type="email" id="email" required
+                        placeholder="alex@company.com"
+                        className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
+                      />
+                    </div>
+                    <div className="space-y-1.5">
+                      <label htmlFor="company" className="text-xs font-semibold text-slate-700">Company</label>
+                      <input
+                        type="text" id="company"
+                        placeholder="Acme Inc."
+                        className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Message */}
+                  <div className="space-y-1.5">
+                    <label htmlFor="message" className="text-xs font-semibold text-slate-700">
+                      What&apos;s your biggest challenge right now?
+                    </label>
+                    <textarea
+                      id="message" rows={4} required
+                      placeholder="Describe what you're trying to solve or build..."
+                      className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all resize-none"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 py-3 text-sm font-semibold text-white hover:bg-blue-700 transition-colors shadow-sm"
+                  >
+                    Send message <ArrowRight className="h-4 w-4" />
+                  </button>
+
+                  <p className="text-center text-xs text-slate-400">
+                    No spam. No lock-in. We respond within 4 hours on business days.
+                  </p>
                 </form>
-              </div>
-            </div>
-            
-            {/* Info */}
-            <div className="lg:col-span-2 space-y-6">
-              <div className="bg-slate-50 rounded-2xl p-8 border border-slate-100">
-                <h3 className="text-xl font-bold text-slate-900 mb-6">Contact Information</h3>
-                <div className="space-y-6">
-                  <div className="flex gap-4">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600">
-                      <Mail className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Email</div>
-                      <div className="font-medium text-slate-900">hello@vyntrise.com</div>
-                    </div>
+              )}
+            </motion.div>
+
+            {/* Right sidebar */}
+            <div className="space-y-5">
+
+              {/* Trust stats */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="grid grid-cols-3 gap-3"
+              >
+                {trust.map((t) => (
+                  <div key={t.label} className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm text-center">
+                    <p className="text-lg font-extrabold text-blue-600">{t.value}</p>
+                    <p className="text-[10px] text-slate-400 mt-0.5 leading-tight">{t.label}</p>
                   </div>
-                  <div className="flex gap-4">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600">
-                      <Phone className="h-5 w-5" />
+                ))}
+              </motion.div>
+
+              {/* What happens next */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.15 }}
+                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+              >
+                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4">What happens next</p>
+                <div className="space-y-5">
+                  {nextSteps.map((s) => (
+                    <div key={s.step} className="flex gap-4">
+                      <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-50 border border-blue-100 text-[10px] font-bold text-blue-600">
+                        {s.step}
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-slate-900">{s.title}</p>
+                        <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{s.detail}</p>
+                      </div>
                     </div>
-                    <div>
-                      <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Phone</div>
-                      <div className="font-medium text-slate-900">+1 (555) 123-4567</div>
-                    </div>
-                  </div>
-                  <div className="flex gap-4">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600">
-                      <MapPin className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Address</div>
-                      <div className="font-medium text-slate-900 leading-relaxed">123 Tech Street, San Francisco, CA 94105</div>
-                    </div>
-                  </div>
+                  ))}
                 </div>
-              </div>
-              
-              <div className="bg-slate-50 rounded-2xl p-8 border border-slate-100">
-                <h3 className="text-xl font-bold text-slate-900 mb-6">Business Hours</h3>
+              </motion.div>
+
+              {/* Direct contact */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+              >
+                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4">Prefer direct contact</p>
                 <div className="space-y-3">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-slate-600">Monday - Friday</span>
-                    <span className="font-medium text-slate-900">9:00 AM - 6:00 PM PST</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-slate-600">Saturday</span>
-                    <span className="font-medium text-slate-900">10:00 AM - 4:00 PM PST</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-slate-600">Sunday</span>
-                    <span className="font-medium text-slate-500">Closed</span>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-white rounded-2xl p-8 border border-slate-200">
-                <h3 className="text-xl font-bold text-slate-900 mb-6">Follow Us</h3>
-                <div className="flex gap-4">
-                  <a href="#" className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-50 text-blue-600 hover:bg-blue-50 transition-colors border border-slate-100">
-                    <Linkedin className="h-5 w-5" />
+                  <a href="mailto:hello@vyntrise.com" className="flex items-center gap-3 text-sm text-slate-700 hover:text-blue-600 transition-colors group">
+                    <div className="h-8 w-8 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center group-hover:border-blue-200 group-hover:bg-blue-50 transition-colors">
+                      <Mail className="h-4 w-4" />
+                    </div>
+                    hello@vyntrise.com
                   </a>
-                  <a href="#" className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-50 text-blue-600 hover:bg-blue-50 transition-colors border border-slate-100">
-                    <Twitter className="h-5 w-5" />
-                  </a>
-                  <a href="#" className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-50 text-blue-600 hover:bg-blue-50 transition-colors border border-slate-100">
-                    <Facebook className="h-5 w-5" />
-                  </a>
-                  <a href="#" className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-50 text-blue-600 hover:bg-blue-50 transition-colors border border-slate-100">
-                    <Instagram className="h-5 w-5" />
+                  <a href="#" className="flex items-center gap-3 text-sm text-slate-700 hover:text-blue-600 transition-colors group">
+                    <div className="h-8 w-8 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center group-hover:border-blue-200 group-hover:bg-blue-50 transition-colors">
+                      <Clock className="h-4 w-4" />
+                    </div>
+                    Book a 30-min call
                   </a>
                 </div>
-              </div>
+                <div className="mt-5 pt-5 border-t border-slate-100 flex items-center gap-3">
+                  {[Linkedin, Twitter, Github].map((SIcon, i) => (
+                    <a
+                      key={i}
+                      href="#"
+                      className="h-8 w-8 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500 hover:text-blue-600 hover:border-blue-200 hover:bg-blue-50 transition-colors"
+                    >
+                      <SIcon className="h-4 w-4" />
+                    </a>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Hours */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.25 }}
+                className="rounded-2xl border border-slate-200 bg-slate-50/60 p-5"
+              >
+                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-3">Business hours</p>
+                <div className="space-y-2">
+                  {[
+                    { day: 'Mon – Fri', hours: '9:00 AM – 6:00 PM PST' },
+                    { day: 'Saturday', hours: '10:00 AM – 4:00 PM PST' },
+                    { day: 'Sunday', hours: 'Closed' },
+                  ].map((r) => (
+                    <div key={r.day} className="flex justify-between text-xs">
+                      <span className="text-slate-500">{r.day}</span>
+                      <span className={`font-semibold ${r.hours === 'Closed' ? 'text-slate-400' : 'text-slate-700'}`}>{r.hours}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-3 flex items-center gap-1.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="text-[10px] text-emerald-600 font-semibold">Support agents online now</span>
+                </div>
+              </motion.div>
+
             </div>
           </div>
         </div>
       </section>
 
-      {/* Map */}
-      <section className="py-24 px-4 md:px-6">
-        <div className="container mx-auto max-w-6xl">
-          <div className="mb-8">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">Visit Our Office</h2>
-            <p className="text-slate-600">Located in the heart of San Francisco&apos;s tech district. Drop by for a coffee and let&apos;s discuss your project.</p>
-          </div>
-          <div className="rounded-2xl bg-slate-200 aspect-[21/9] flex items-center justify-center">
-            <span className="text-slate-500 font-medium">Interactive Map</span>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
