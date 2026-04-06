@@ -3,8 +3,12 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Check, X, ArrowRight, Zap, ChevronDown, ChevronUp } from 'lucide-react';
+import {
+  Check, X, ArrowRight, Zap, ChevronDown, ChevronUp,
+  Star, ShieldCheck,
+} from 'lucide-react';
 
+/* ─── Plans ─── */
 const plans = [
   {
     id: 'starter',
@@ -15,6 +19,7 @@ const plans = [
     cta: 'Start free trial',
     ctaHref: '/contact',
     highlight: false,
+    color: 'slate',
     features: [
       'AI Search & Reputation (1 location)',
       'Up to 5 automated workflows',
@@ -34,6 +39,7 @@ const plans = [
     ctaHref: '/contact',
     highlight: true,
     badge: 'Most popular',
+    color: 'blue',
     features: [
       'Everything in Starter, plus:',
       'AI Search & Reputation (up to 5 locations)',
@@ -55,6 +61,7 @@ const plans = [
     cta: 'Talk to sales',
     ctaHref: '/contact',
     highlight: false,
+    color: 'slate',
     features: [
       'Everything in Professional, plus:',
       'Unlimited locations',
@@ -69,71 +76,81 @@ const plans = [
   },
 ];
 
+/* ─── Comparison table ─── */
 const featureRows = [
   {
-    category: 'AI Search & Reputation', rows: [
-      { label: 'Locations covered', starter: '1', pro: 'Up to 5', enterprise: 'Unlimited' },
-      { label: 'Review platforms', starter: '3', pro: 'All', enterprise: 'All + custom' },
-      { label: 'AI response drafting', starter: true, pro: true, enterprise: true },
-      { label: 'Reputation audits', starter: 'Monthly', pro: 'Weekly', enterprise: 'Real-time' },
-      { label: 'Competitor gap analysis', starter: false, pro: true, enterprise: true },
-    ]
+    category: 'AI Search & Reputation',
+    rows: [
+      { label: 'Locations covered',      starter: '1',       pro: 'Up to 5',  enterprise: 'Unlimited'    },
+      { label: 'Review platforms',        starter: '3',       pro: 'All',      enterprise: 'All + custom' },
+      { label: 'AI response drafting',    starter: true,      pro: true,       enterprise: true           },
+      { label: 'Reputation audits',       starter: 'Monthly', pro: 'Weekly',   enterprise: 'Real-time'    },
+      { label: 'Competitor gap analysis', starter: false,     pro: true,       enterprise: true           },
+    ],
   },
   {
-    category: 'Automation', rows: [
-      { label: 'Automated workflows', starter: 'Up to 5', pro: 'Unlimited', enterprise: 'Unlimited' },
-      { label: 'Multi-agent orchestration', starter: false, pro: true, enterprise: true },
-      { label: 'Knowledge Brain (RAG)', starter: false, pro: '1 instance', enterprise: 'Unlimited' },
-      { label: 'Custom AI integrations', starter: false, pro: false, enterprise: true },
-      { label: 'Process automation (IPA)', starter: false, pro: true, enterprise: true },
-    ]
+    category: 'Automation',
+    rows: [
+      { label: 'Automated workflows',       starter: 'Up to 5', pro: 'Unlimited',  enterprise: 'Unlimited'  },
+      { label: 'Multi-agent orchestration', starter: false,     pro: true,         enterprise: true         },
+      { label: 'Knowledge Brain (RAG)',      starter: false,     pro: '1 instance', enterprise: 'Unlimited'  },
+      { label: 'Custom AI integrations',    starter: false,     pro: false,        enterprise: true         },
+      { label: 'Process automation (IPA)',  starter: false,     pro: true,         enterprise: true         },
+    ],
   },
   {
-    category: 'Data & Analytics', rows: [
-      { label: 'Analytics dashboard', starter: 'Monthly', pro: 'Weekly', enterprise: 'Real-time' },
-      { label: 'Data pipeline connectors', starter: false, pro: '5', enterprise: 'Unlimited' },
-      { label: 'Custom reporting', starter: false, pro: false, enterprise: true },
-      { label: 'Data governance tools', starter: false, pro: false, enterprise: true },
-    ]
+    category: 'Data & Analytics',
+    rows: [
+      { label: 'Analytics dashboard',    starter: 'Monthly', pro: 'Weekly', enterprise: 'Real-time' },
+      { label: 'Data pipeline connectors', starter: false,   pro: '5',      enterprise: 'Unlimited' },
+      { label: 'Custom reporting',        starter: false,    pro: false,    enterprise: true        },
+      { label: 'Data governance tools',   starter: false,    pro: false,    enterprise: true        },
+    ],
   },
   {
-    category: 'Support & Security', rows: [
-      { label: 'Support channel', starter: 'Email', pro: '24/7 priority', enterprise: 'Dedicated manager' },
-      { label: 'Onboarding', starter: 'Self-serve', pro: 'Specialist', enterprise: 'White-glove' },
-      { label: 'Uptime SLA', starter: '99.9%', pro: '99.9%', enterprise: 'Custom' },
-      { label: 'SOC 2 / HIPAA compliance', starter: false, pro: true, enterprise: true },
-      { label: 'On-premise deployment', starter: false, pro: false, enterprise: true },
-    ]
+    category: 'Support & Security',
+    rows: [
+      { label: 'Support channel',        starter: 'Email',      pro: '24/7 priority',    enterprise: 'Dedicated manager' },
+      { label: 'Onboarding',             starter: 'Self-serve', pro: 'Specialist',        enterprise: 'White-glove'       },
+      { label: 'Uptime SLA',             starter: '99.9%',      pro: '99.9%',             enterprise: 'Custom'            },
+      { label: 'SOC 2 / HIPAA',          starter: false,        pro: true,                enterprise: true                },
+      { label: 'On-premise deployment',  starter: false,        pro: false,               enterprise: true                },
+    ],
   },
 ];
 
+/* ─── FAQs ─── */
 const faqs = [
-  {
-    q: 'Can I switch plans at any time?',
-    a: 'Yes. Upgrades take effect immediately and are prorated. Downgrades apply at the next billing cycle.',
-  },
-  {
-    q: 'Is there a free trial?',
-    a: 'Starter and Professional both include a 14-day free trial — no credit card required.',
-  },
-  {
-    q: 'What counts as a "location"?',
-    a: 'A location is a distinct business address with its own Google Business Profile and review presence.',
-  },
-  {
-    q: 'How does annual billing work?',
-    a: 'Annual plans are billed upfront for 12 months and save you ~20% compared to monthly billing.',
-  },
-  {
-    q: 'What\'s included in Enterprise?',
-    a: 'Enterprise is fully custom — we scope it around your specific needs, team size, compliance requirements, and growth goals.',
-  },
+  { q: 'Can I switch plans at any time?',    a: 'Yes. Upgrades take effect immediately and are prorated. Downgrades apply at the next billing cycle.' },
+  { q: 'Is there a free trial?',             a: 'Starter and Professional both include a 14-day free trial — no credit card required.' },
+  { q: 'What counts as a "location"?',       a: 'A location is a distinct business address with its own Google Business Profile and review presence.' },
+  { q: 'How does annual billing work?',      a: 'Annual plans are billed upfront for 12 months and save you ~20% compared to monthly billing.' },
+  { q: "What's included in Enterprise?",     a: 'Enterprise is fully custom — we scope it around your specific needs, team size, compliance requirements, and growth goals.' },
+  { q: 'What payment methods do you accept?', a: 'We accept all major credit and debit cards (Visa, Mastercard, Amex), ACH bank transfers, and wire transfers for Enterprise. All payments are processed securely via Stripe.' },
 ];
 
-function CellValue({ val }: { val: string | boolean }) {
-  if (val === true) return <span className="flex justify-center"><Check className="h-4 w-4 text-emerald-500" /></span>;
-  if (val === false) return <span className="flex justify-center"><X className="h-4 w-4 text-slate-300" /></span>;
-  return <span className="text-xs text-slate-600 text-center block">{val}</span>;
+/* ─── Testimonials ─── */
+const testimonials = [
+  { quote: 'The ROI was clear within 30 days. Best investment we made this year.', name: 'Sarah M.', role: 'Martinez Dental Group', initials: 'SM', color: 'bg-blue-500' },
+  { quote: 'Switched from a $2k/mo agency to VyntRise Professional. Better results, half the cost.', name: 'Michael C.', role: 'TechStart Solutions', initials: 'MC', color: 'bg-violet-500' },
+  { quote: 'Enterprise plan paid for itself in the first quarter. The team is exceptional.', name: 'James O.', role: 'Meridian Logistics', initials: 'JO', color: 'bg-emerald-500' },
+];
+
+/* ─── Cell renderer ─── */
+function CellValue({ val, isProCol }: { val: string | boolean; isProCol?: boolean }) {
+  if (val === true) return (
+    <span className="flex justify-center">
+      <span className={`flex h-5 w-5 items-center justify-center rounded-full ${isProCol ? 'bg-blue-600' : 'bg-emerald-500'}`}>
+        <Check className="h-3 w-3 text-white" />
+      </span>
+    </span>
+  );
+  if (val === false) return (
+    <span className="flex justify-center">
+      <X className="h-4 w-4 text-slate-300" />
+    </span>
+  );
+  return <span className={`text-xs text-center block ${isProCol ? 'font-semibold text-blue-600' : 'text-slate-600'}`}>{val}</span>;
 }
 
 export default function PricingPage() {
@@ -144,7 +161,7 @@ export default function PricingPage() {
     <div className="flex flex-col min-h-screen bg-white">
 
       {/* ── Header ── */}
-      <section className="border-b border-slate-100 bg-slate-50/60 pt-20 pb-12 px-4 md:px-6">
+      <section className="border-b border-slate-100 bg-slate-50/40 pt-20 pb-12 px-4 md:px-6">
         <div className="container mx-auto max-w-6xl">
           <div className="github-badge mb-4">PRICING</div>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-4 leading-tight">
@@ -154,8 +171,8 @@ export default function PricingPage() {
             No hidden fees. No lock-in. Cancel anytime. Start with a 14-day free trial.
           </p>
 
-          {/* Toggle */}
-          <div className="inline-flex items-center gap-3 rounded-full border border-slate-200 bg-white p-1 shadow-sm">
+          {/* Billing toggle */}
+          <div className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white p-1 shadow-sm">
             <button
               onClick={() => setAnnual(false)}
               className={`rounded-full px-5 py-2 text-sm font-semibold transition-all ${!annual ? 'bg-slate-900 text-white shadow-sm' : 'text-slate-500 hover:text-slate-900'}`}
@@ -176,19 +193,21 @@ export default function PricingPage() {
       </section>
 
       {/* ── Pricing cards ── */}
-      <section className="px-4 md:px-6 pb-16">
+      <section className="px-4 md:px-6 py-14">
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-3 gap-5 items-start">
             {plans.map((plan, i) => (
               <motion.div
                 key={plan.id}
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
-                className={`relative rounded-2xl flex flex-col overflow-hidden ${plan.highlight
-                  ? 'bg-slate-900 text-white shadow-2xl shadow-slate-900/20 ring-1 ring-slate-900'
-                  : 'bg-white border border-slate-200 shadow-sm'
-                  }`}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: i * 0.1 }}
+                className={`relative rounded-2xl flex flex-col overflow-hidden ${
+                  plan.highlight
+                    ? 'bg-slate-900 text-white shadow-2xl shadow-slate-900/25 ring-1 ring-slate-800'
+                    : 'bg-white border border-slate-200 shadow-sm'
+                }`}
               >
                 {plan.badge && (
                   <div className="absolute top-4 right-4">
@@ -200,37 +219,46 @@ export default function PricingPage() {
 
                 <div className="p-7 flex-1">
                   <h3 className={`text-lg font-bold mb-1 ${plan.highlight ? 'text-white' : 'text-slate-900'}`}>{plan.name}</h3>
-                  <p className={`text-sm mb-6 ${plan.highlight ? 'text-slate-400' : 'text-slate-500'}`}>{plan.desc}</p>
+                  <p className={`text-sm mb-7 ${plan.highlight ? 'text-slate-400' : 'text-slate-500'}`}>{plan.desc}</p>
 
                   {/* Price */}
-                  <div className="mb-7">
+                  <div className="mb-8">
                     {plan.monthly !== null ? (
-                      <div className="flex items-end gap-1">
-                        <AnimatePresence mode="wait">
-                          <motion.span
-                            key={annual ? 'annual' : 'monthly'}
-                            initial={{ opacity: 0, y: -8 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 8 }}
-                            transition={{ duration: 0.2 }}
-                            className={`text-5xl font-extrabold tracking-tight ${plan.highlight ? 'text-white' : 'text-slate-900'}`}
-                          >
-                            ${annual ? plan.annual : plan.monthly}
-                          </motion.span>
-                        </AnimatePresence>
-                        <span className={`mb-2 text-sm ${plan.highlight ? 'text-slate-400' : 'text-slate-400'}`}>/mo</span>
-                      </div>
+                      <>
+                        <div className="flex items-end gap-1">
+                          <AnimatePresence mode="wait">
+                            <motion.span
+                              key={annual ? 'annual' : 'monthly'}
+                              initial={{ opacity: 0, y: -6 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: 6 }}
+                              transition={{ duration: 0.18 }}
+                              className={`text-5xl font-extrabold tracking-tight ${plan.highlight ? 'text-white' : 'text-slate-900'}`}
+                            >
+                              ${annual ? plan.annual : plan.monthly}
+                            </motion.span>
+                          </AnimatePresence>
+                          <span className={`mb-2 text-sm ${plan.highlight ? 'text-slate-400' : 'text-slate-400'}`}>/mo</span>
+                        </div>
+                        {annual && (
+                          <p className="text-xs text-emerald-400 mt-1">
+                            Billed annually — save ${((plan.monthly! - plan.annual!) * 12).toLocaleString()}/yr
+                          </p>
+                        )}
+                        {!annual && (
+                          <p className={`text-xs mt-1 ${plan.highlight ? 'text-slate-500' : 'text-slate-400'}`}>
+                            or ${plan.annual}/mo billed annually
+                          </p>
+                        )}
+                      </>
                     ) : (
                       <span className={`text-4xl font-extrabold ${plan.highlight ? 'text-white' : 'text-slate-900'}`}>Custom</span>
-                    )}
-                    {plan.monthly !== null && annual && (
-                      <p className="text-xs text-emerald-400 mt-1">Billed annually — save ${(plan.monthly! - plan.annual!) * 12}/yr</p>
                     )}
                   </div>
 
                   {/* Features */}
                   <ul className="space-y-3">
-                    {plan.features.map((f) => (
+                    {plan.features.map(f => (
                       <li key={f} className="flex items-start gap-2.5 text-sm">
                         <Check className={`h-4 w-4 mt-0.5 shrink-0 ${plan.highlight ? 'text-blue-400' : 'text-emerald-500'}`} />
                         <span className={plan.highlight ? 'text-slate-300' : 'text-slate-600'}>{f}</span>
@@ -242,13 +270,55 @@ export default function PricingPage() {
                 <div className="p-7 pt-0">
                   <Link
                     href={plan.ctaHref}
-                    className={`flex w-full items-center justify-center gap-2 rounded-lg py-3 text-sm font-semibold transition-colors ${plan.highlight
-                      ? 'bg-blue-600 text-white hover:bg-blue-500'
-                      : 'border border-slate-200 bg-white text-slate-900 hover:bg-slate-50'
-                      }`}
+                    className={`flex w-full items-center justify-center gap-2 rounded-xl py-3 text-sm font-semibold transition-colors ${
+                      plan.highlight
+                        ? 'bg-blue-600 text-white hover:bg-blue-500'
+                        : 'border border-slate-200 bg-white text-slate-900 hover:bg-slate-50'
+                    }`}
                   >
                     {plan.cta} <ArrowRight className="h-4 w-4" />
                   </Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Trust row */}
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-400">
+            {['14-day free trial', 'No credit card required', 'Cancel anytime', 'SOC 2 certified'].map(t => (
+              <div key={t} className="flex items-center gap-1.5">
+                <Check className="h-3.5 w-3.5 text-emerald-500" />
+                {t}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Social proof ── */}
+      <section className="border-y border-slate-100 bg-slate-50/40 px-4 md:px-6 py-12">
+        <div className="container mx-auto max-w-6xl">
+          <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-8 text-center">What customers say about the value</p>
+          <div className="grid md:grid-cols-3 gap-4">
+            {testimonials.map((t, i) => (
+              <motion.div
+                key={t.name}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.08 }}
+                className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm"
+              >
+                <div className="flex gap-0.5 mb-3">
+                  {[...Array(5)].map((_, j) => <Star key={j} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />)}
+                </div>
+                <p className="text-sm text-slate-700 leading-relaxed mb-4">&ldquo;{t.quote}&rdquo;</p>
+                <div className="flex items-center gap-2.5">
+                  <div className={`h-8 w-8 rounded-full ${t.color} flex items-center justify-center text-white text-[10px] font-bold shrink-0`}>{t.initials}</div>
+                  <div>
+                    <p className="text-xs font-semibold text-slate-900">{t.name}</p>
+                    <p className="text-[11px] text-slate-400">{t.role}</p>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -257,35 +327,38 @@ export default function PricingPage() {
       </section>
 
       {/* ── Feature comparison table ── */}
-      <section className="border-t border-slate-100 bg-slate-50/50 px-4 md:px-6 py-16">
+      <section className="px-4 md:px-6 py-16">
         <div className="container mx-auto max-w-6xl">
           <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">Full comparison</p>
           <h2 className="text-2xl font-extrabold text-slate-900 mb-8">Everything, side by side</h2>
 
           <div className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
             {/* Column headers */}
-            <div className="grid grid-cols-[1fr_100px_100px_100px] border-b border-slate-100 bg-slate-50 px-6 py-3">
+            <div className="grid grid-cols-[1fr_110px_110px_110px] border-b border-slate-100 bg-slate-50 px-6 py-3.5">
               <span />
-              {plans.map((p) => (
-                <span key={p.id} className={`text-[11px] font-bold text-center ${p.highlight ? 'text-blue-600' : 'text-slate-500'}`}>
+              {plans.map(p => (
+                <span
+                  key={p.id}
+                  className={`text-[11px] font-bold text-center ${p.highlight ? 'text-blue-600' : 'text-slate-500'}`}
+                >
                   {p.name}
                 </span>
               ))}
             </div>
 
-            {featureRows.map((section) => (
+            {featureRows.map(section => (
               <div key={section.category}>
-                <div className="px-6 py-2.5 bg-slate-50 border-b border-slate-100">
+                <div className="px-6 py-2.5 bg-slate-50/80 border-b border-slate-100">
                   <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">{section.category}</span>
                 </div>
                 {section.rows.map((row, i) => (
                   <div
                     key={row.label}
-                    className={`grid grid-cols-[1fr_100px_100px_100px] px-6 py-3 items-center border-b border-slate-50 ${i % 2 === 0 ? 'bg-white' : 'bg-slate-50/30'}`}
+                    className={`grid grid-cols-[1fr_110px_110px_110px] px-6 py-3 items-center border-b border-slate-50 last:border-0 ${i % 2 === 0 ? 'bg-white' : 'bg-slate-50/20'}`}
                   >
                     <span className="text-sm text-slate-700">{row.label}</span>
                     <CellValue val={row.starter} />
-                    <CellValue val={row.pro} />
+                    <CellValue val={row.pro} isProCol />
                     <CellValue val={row.enterprise} />
                   </div>
                 ))}
@@ -296,16 +369,24 @@ export default function PricingPage() {
       </section>
 
       {/* ── FAQ ── */}
-      <section className="px-4 md:px-6 py-16 border-t border-slate-100">
-        <div className="container mx-auto max-w-6xl">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">FAQ</p>
-          <h2 className="text-2xl font-extrabold text-slate-900 mb-8">Common questions</h2>
+      <section className="border-t border-slate-100 bg-slate-50/40 px-4 md:px-6 py-16">
+        <div className="container mx-auto max-w-6xl grid lg:grid-cols-[1fr_2fr] gap-12">
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">FAQ</p>
+            <h2 className="text-2xl font-extrabold text-slate-900 mb-3">Common questions</h2>
+            <p className="text-sm text-slate-500 leading-relaxed mb-4">
+              Can&apos;t find what you&apos;re looking for?
+            </p>
+            <Link href="/faq" className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors">
+              Browse all FAQs <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
           <div className="space-y-2">
             {faqs.map((faq, i) => (
-              <div key={i} className="rounded-xl border border-slate-200 bg-white overflow-hidden">
+              <div key={i} className="rounded-xl border border-slate-200 bg-white overflow-hidden shadow-sm">
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full flex items-center justify-between px-5 py-4 text-left"
+                  className="w-full flex items-center justify-between px-5 py-4 text-left gap-4"
                 >
                   <span className="text-sm font-semibold text-slate-900">{faq.q}</span>
                   {openFaq === i
@@ -333,21 +414,43 @@ export default function PricingPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="px-4 md:px-6 py-16 bg-slate-900">
-        <div className="container mx-auto max-w-6xl flex flex-col md:flex-row items-center justify-between gap-8">
-          <div>
-            <h2 className="text-3xl font-extrabold text-white mb-3">Not sure which plan fits?</h2>
-            <p className="text-slate-400 max-w-md text-sm">
-              Tell us about your business and we&apos;ll recommend the right starting point — no sales pressure.
-            </p>
+      <section className="relative overflow-hidden bg-slate-900 px-4 md:px-6 py-24">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute left-1/2 top-0 -translate-x-1/2 h-[400px] w-[700px] rounded-full bg-blue-600/15 blur-[80px]" />
+          <div className="absolute left-1/4 bottom-0 h-[300px] w-[500px] rounded-full bg-violet-600/10 blur-[80px]" />
+        </div>
+        <div className="relative container mx-auto max-w-4xl text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 mb-8">
+            <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
+            <span className="text-xs font-semibold text-slate-300">No sales pressure — just honest advice</span>
           </div>
-          <div className="flex flex-col sm:flex-row gap-3 shrink-0">
-            <Link href="/contact" className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-700 transition-colors">
-              Talk to us <ArrowRight className="h-4 w-4" />
+          <h2 className="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-5 tracking-tight">
+            Not sure which plan fits?
+          </h2>
+          <p className="text-slate-400 text-lg max-w-xl mx-auto mb-10 leading-relaxed">
+            Tell us about your business and we&apos;ll recommend the right starting point — free, no commitment.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="/contact"
+              className="group inline-flex items-center gap-2 rounded-xl bg-blue-600 px-8 py-4 text-sm font-bold text-white hover:bg-blue-500 transition-colors shadow-xl shadow-blue-900/40"
+            >
+              Talk to us <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
             </Link>
-            <Link href="/services" className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10 transition-colors">
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-8 py-4 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
+            >
               Explore services
             </Link>
+          </div>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-500">
+            {['SOC 2 certified', 'GDPR compliant', '99.9% uptime SLA', 'Cancel anytime'].map(t => (
+              <div key={t} className="flex items-center gap-1.5">
+                <Check className="h-3.5 w-3.5 text-emerald-500" />
+                {t}
+              </div>
+            ))}
           </div>
         </div>
       </section>

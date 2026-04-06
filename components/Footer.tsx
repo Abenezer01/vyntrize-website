@@ -20,8 +20,8 @@ const companyLinks = [
 const resourceLinks = [
   { label: 'Documentation', href: '#' },
   { label: 'API Reference', href: '#' },
-  { label: 'Case Studies', href: '/solutions' },
-  { label: 'Support', href: '/contact' },
+  { label: 'FAQ', href: '/faq' },
+  { label: 'Support', href: '/support' },
 ];
 
 const socials = [
