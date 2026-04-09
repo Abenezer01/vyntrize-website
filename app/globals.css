@@ -44,17 +44,39 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
-  /* ── Dark mode token overrides ── */
+  /* ── Dark mode token overrides — matched to brand reference ── */
+  /*
+    Background:      #0D1117  (deep navy-black)
+    Surface/card:    #131929  (navy panel)
+    Surface raised:  #1A2236  (slightly lighter navy)
+    Border:          #1E2A3B  (dark navy border)
+    Text primary:    #E6EDF3  (near white)
+    Text muted:      #8B949E  (slate muted)
+    Primary button:  #5B5BD6  (indigo-violet — brand CTA)
+    Primary hover:   #4A4AC4
+  */
   .dark {
-    --color-border: #21262d;
-    --color-background: #0d1117;
-    --color-foreground: #e6edf3;
-    --color-secondary: #161b22;
-    --color-secondary-foreground: #e6edf3;
-    --color-muted: #161b22;
-    --color-muted-foreground: #8b949e;
-    --color-accent: #161b22;
-    --color-accent-foreground: #e6edf3;
+    --color-border:               #1E2A3B;
+    --color-background:           #0D1117;
+    --color-foreground:           #E6EDF3;
+    --color-secondary:            #131929;
+    --color-secondary-foreground: #E6EDF3;
+    --color-muted:                #131929;
+    --color-muted-foreground:     #8B949E;
+    --color-accent:               #1A2236;
+    --color-accent-foreground:    #E6EDF3;
+    --color-primary:              #5B5BD6;
+    --color-primary-foreground:   #FFFFFF;
+
+    /* Convenience aliases used in dark: utilities */
+    --dk-bg:        #0D1117;
+    --dk-surface:   #131929;
+    --dk-raised:    #1A2236;
+    --dk-border:    #1E2A3B;
+    --dk-text:      #E6EDF3;
+    --dk-muted:     #8B949E;
+    --dk-primary:   #5B5BD6;
+    --dk-primary-h: #4A4AC4;
   }
 }
 
@@ -66,8 +88,8 @@
 }
 
 .dark .glass-morphism {
-  background: rgba(22, 27, 34, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(19, 25, 41, 0.85);
+  border: 1px solid rgba(30, 42, 59, 0.8);
 }
 
 .notion-card {
@@ -75,7 +97,7 @@
 }
 
 .dark .notion-card {
-  @apply bg-[#161b22] border-[#21262d] hover:border-[#30363d];
+  @apply bg-[#131929] border-[#1E2A3B] hover:border-[#2A3A52];
 }
 
 .github-badge {
@@ -83,7 +105,7 @@
 }
 
 .dark .github-badge {
-  @apply bg-[#161b22] text-[#8b949e] border-[#21262d];
+  @apply bg-[#1A2236] text-[#8B949E] border-[#1E2A3B];
 }
 
 .writing-mode-vertical {
