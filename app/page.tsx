@@ -236,14 +236,14 @@ export default function Home() {
   const CIcon = current.icon;
 
   return (
-    <div className="flex flex-col bg-white">
+    <div className="flex flex-col bg-white dark:bg-[#0d1117]">
 
       {/* ── 1. Hero ── */}
       <Hero />
 
       {/* ── 2. Logo strip ── */}
-      <section className="border-y border-slate-100 bg-white py-10 overflow-hidden">
-        <p className="text-center text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-7">
+      <section className="border-y border-slate-100 dark:border-[#21262d] bg-white dark:bg-[#0d1117] py-10 overflow-hidden">
+        <p className="text-center text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-[#8b949e] mb-7">
           Trusted by 500+ businesses worldwide
         </p>
         {/* Fade edges */}
@@ -268,21 +268,20 @@ export default function Home() {
       </section>
 
       {/* ── 3. How it works ── */}
-      <section className="px-4 md:px-6 py-24 border-b border-slate-100">
+      <section className="px-4 md:px-6 py-24 border-b border-slate-100 dark:border-[#21262d]">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <div className="github-badge mb-4">HOW IT WORKS</div>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-4">
               Up and running in days, not months
             </h2>
-            <p className="text-lg text-slate-500 max-w-xl mx-auto">
+            <p className="text-lg text-slate-500 dark:text-[#8b949e] max-w-xl mx-auto">
               No long onboarding. No engineering team required. Just results.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 relative">
-            {/* Connector line */}
-            <div className="hidden md:block absolute top-10 left-[calc(16.67%+1rem)] right-[calc(16.67%+1rem)] h-px bg-gradient-to-r from-blue-200 via-violet-200 to-emerald-200" />
+            <div className="hidden md:block absolute top-10 left-[calc(16.67%+1rem)] right-[calc(16.67%+1rem)] h-px bg-gradient-to-r from-blue-200 via-violet-200 to-emerald-200 dark:from-blue-900 dark:via-violet-900 dark:to-emerald-900" />
 
             {steps.map((step, i) => (
               <motion.div
@@ -291,18 +290,17 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.12 }}
-                className="relative flex flex-col gap-5 rounded-2xl border border-slate-200 bg-white p-7 shadow-sm hover:shadow-md transition-shadow"
+                className="relative flex flex-col gap-5 rounded-2xl border border-slate-200 dark:border-[#21262d] bg-white dark:bg-[#161b22] p-7 shadow-sm hover:shadow-md transition-shadow"
               >
-                {/* Step number badge */}
                 <div className="flex items-center justify-between">
                   <div className={`h-10 w-10 rounded-xl border flex items-center justify-center ${stepColor[step.color]}`}>
                     <step.icon className="h-5 w-5" />
                   </div>
-                  <span className="text-3xl font-black text-slate-100 font-mono">{step.n}</span>
+                  <span className="text-3xl font-black text-slate-100 dark:text-[#21262d] font-mono">{step.n}</span>
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-slate-900 mb-2">{step.title}</h3>
-                  <p className="text-sm text-slate-500 leading-relaxed">{step.body}</p>
+                  <h3 className="text-base font-bold text-slate-900 dark:text-white mb-2">{step.title}</h3>
+                  <p className="text-sm text-slate-500 dark:text-[#8b949e] leading-relaxed">{step.body}</p>
                 </div>
               </motion.div>
             ))}
@@ -311,7 +309,7 @@ export default function Home() {
           <div className="mt-10 text-center">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-7 py-3.5 text-sm font-bold text-white hover:bg-slate-700 transition-colors shadow-md"
+              className="inline-flex items-center gap-2 rounded-xl bg-slate-900 dark:bg-[#4B6CF7] px-7 py-3.5 text-sm font-bold text-white hover:bg-slate-700 dark:hover:bg-[#3d5ce0] transition-colors shadow-md"
             >
               Get started free <ArrowRight className="h-4 w-4" />
             </Link>
@@ -320,14 +318,14 @@ export default function Home() {
       </section>
 
       {/* ── 4. Bento feature grid ── */}
-      <section className="px-4 md:px-6 py-24 border-b border-slate-100 bg-slate-50/40">
+      <section className="px-4 md:px-6 py-24 border-b border-slate-100 dark:border-[#21262d] bg-slate-50/40 dark:bg-[#0d1117]">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-14">
             <div className="github-badge mb-4">PLATFORM</div>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-4">
               Everything your business needs to scale
             </h2>
-            <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+            <p className="text-lg text-slate-500 dark:text-[#8b949e] max-w-2xl mx-auto">
               One platform. Five service lines. Measurable outcomes from day one.
             </p>
           </div>
@@ -338,14 +336,14 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.5 }}
-              className="col-span-2 row-span-2 rounded-2xl border border-slate-200 bg-white shadow-sm p-7 flex flex-col justify-between group hover:shadow-md hover:border-blue-200 transition-all overflow-hidden"
+              className="col-span-2 row-span-2 rounded-2xl border border-slate-200 dark:border-[#21262d] bg-white dark:bg-[#161b22] shadow-sm p-7 flex flex-col justify-between group hover:shadow-md hover:border-blue-200 dark:hover:border-blue-800 transition-all overflow-hidden"
             >
               <div>
                 <div className="h-11 w-11 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 mb-5">
                   <Bot className="h-5 w-5" />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2">Autonomous AI Agents</h3>
-                <p className="text-sm text-slate-500 leading-relaxed">Deploy agents that engage leads, answer questions, and complete workflows — without human intervention.</p>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Autonomous AI Agents</h3>
+                <p className="text-sm text-slate-500 dark:text-[#8b949e] leading-relaxed">Deploy agents that engage leads, answer questions, and complete workflows — without human intervention.</p>
               </div>
               {/* Animated bar chart — whileInView */}
               <div className="mt-4 rounded-xl bg-slate-50 border border-slate-100 p-4">
@@ -375,14 +373,14 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
-              className="col-span-1 rounded-2xl border border-slate-200 bg-white shadow-sm p-5 flex flex-col justify-between hover:shadow-md hover:border-violet-200 transition-all"
+              className="col-span-1 rounded-2xl border border-slate-200 dark:border-[#21262d] bg-white dark:bg-[#161b22] shadow-sm p-5 flex flex-col justify-between hover:shadow-md hover:border-violet-200 dark:hover:border-violet-800 transition-all"
             >
-              <div className="h-9 w-9 rounded-lg bg-violet-50 border border-violet-100 flex items-center justify-center text-violet-600">
+              <div className="h-9 w-9 rounded-lg bg-violet-50 dark:bg-violet-900/30 border border-violet-100 dark:border-violet-800 flex items-center justify-center text-violet-600">
                 <TrendingUp className="h-4 w-4" />
               </div>
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Avg. reputation lift</p>
-                <p className="text-3xl font-extrabold text-slate-900">+1.2★</p>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-[#8b949e] mb-1">Avg. reputation lift</p>
+                <p className="text-3xl font-extrabold text-slate-900 dark:text-white">+1.2★</p>
               </div>
             </motion.div>
 
@@ -390,14 +388,14 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.15 }}
-              className="col-span-1 rounded-2xl border border-slate-200 bg-white shadow-sm p-5 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 transition-all"
+              className="col-span-1 rounded-2xl border border-slate-200 dark:border-[#21262d] bg-white dark:bg-[#161b22] shadow-sm p-5 flex flex-col justify-between hover:shadow-md hover:border-emerald-200 dark:hover:border-emerald-800 transition-all"
             >
-              <div className="h-9 w-9 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600">
+              <div className="h-9 w-9 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-100 dark:border-emerald-800 flex items-center justify-center text-emerald-600">
                 <Clock className="h-4 w-4" />
               </div>
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">First results in</p>
-                <p className="text-2xl font-extrabold text-slate-900">&lt; 30 days</p>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-[#8b949e] mb-1">First results in</p>
+                <p className="text-2xl font-extrabold text-slate-900 dark:text-white">&lt; 30 days</p>
               </div>
             </motion.div>
 
@@ -427,17 +425,17 @@ export default function Home() {
       </section>
 
       {/* ── 5. Services tabs ── */}
-      <section className="px-4 md:px-6 py-24 border-b border-slate-100">
+      <section className="px-4 md:px-6 py-24 border-b border-slate-100 dark:border-[#21262d]">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <div className="github-badge mb-4">SERVICES</div>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-4">
               Five ways we grow your business
             </h2>
           </div>
 
           {/* Tab bar */}
-          <div className="flex gap-0 overflow-x-auto pb-px mb-10 border-b border-slate-100">
+          <div className="flex gap-0 overflow-x-auto pb-px mb-10 border-b border-slate-100 dark:border-[#21262d]">
             {services.map((s) => {
               const SIcon = s.icon;
               const isActive = s.id === activeService;
@@ -498,13 +496,13 @@ export default function Home() {
       </section>
 
       {/* ── 6. Testimonials ── */}
-      <section className="py-24 bg-slate-50/60 border-b border-slate-100 overflow-hidden">
+      <section className="py-24 bg-slate-50/60 dark:bg-[#161b22] border-b border-slate-100 dark:border-[#21262d] overflow-hidden">
         <div className="container mx-auto max-w-6xl px-4 md:px-6 mb-12 text-center">
           <div className="github-badge mb-4">TESTIMONIALS</div>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-3">
             Loved by teams that ship
           </h2>
-          <p className="text-slate-500 max-w-md mx-auto text-sm">Real results from real businesses. No cherry-picked metrics.</p>
+          <p className="text-slate-500 dark:text-[#8b949e] max-w-md mx-auto text-sm">Real results from real businesses. No cherry-picked metrics.</p>
         </div>
 
         {/* Two-row marquee — row 1 forward, row 2 reverse (Clerk/Resend style) */}
@@ -521,7 +519,7 @@ export default function Home() {
                 {[...row, ...row].map((t, i) => (
                   <div
                     key={i}
-                    className="w-72 shrink-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+                    className="w-72 shrink-0 rounded-2xl border border-slate-200 dark:border-[#21262d] bg-white dark:bg-[#0d1117] p-5 shadow-sm"
                   >
                     <div className="flex gap-0.5 mb-3">
                       {[...Array(5)].map((_, j) => (
@@ -547,19 +545,19 @@ export default function Home() {
       </section>
 
       {/* ── 7. Why VyntRise comparison ── */}
-      <section className="px-4 md:px-6 py-24 border-b border-slate-100">
+      <section className="px-4 md:px-6 py-24 border-b border-slate-100 dark:border-[#21262d]">
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-12">
             <div className="github-badge mb-4">WHY VYNTRISE</div>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Built different</h2>
-            <p className="text-slate-500 max-w-md mx-auto text-sm">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4">Built different</h2>
+            <p className="text-slate-500 dark:text-[#8b949e] max-w-md mx-auto text-sm">
               Most agencies sell retainers. We sell outcomes.
             </p>
           </div>
 
-          <div className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+          <div className="rounded-2xl border border-slate-200 dark:border-[#21262d] bg-white dark:bg-[#161b22] shadow-sm overflow-hidden">
             {/* Header */}
-            <div className="grid grid-cols-[1fr_140px_140px] border-b border-slate-100 bg-slate-50 px-6 py-3.5">
+            <div className="grid grid-cols-[1fr_140px_140px] border-b border-slate-100 dark:border-[#21262d] bg-slate-50 dark:bg-[#0d1117] px-6 py-3.5">
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">What you get</span>
               <div className="flex items-center justify-center gap-1.5">
                 <div className="h-4 w-4 rounded bg-slate-900 flex items-center justify-center">
@@ -577,9 +575,9 @@ export default function Home() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: i * 0.04 }}
-                className={`grid grid-cols-[1fr_140px_140px] px-6 py-3.5 items-center border-b border-slate-50 last:border-0 ${i % 2 === 0 ? 'bg-white' : 'bg-slate-50/30'}`}
+                className={`grid grid-cols-[1fr_140px_140px] px-6 py-3.5 items-center border-b border-slate-50 dark:border-[#21262d] last:border-0 ${i % 2 === 0 ? 'bg-white dark:bg-[#161b22]' : 'bg-slate-50/30 dark:bg-[#0d1117]'}`}
               >
-                <span className="text-sm text-slate-700">{row.label}</span>
+                <span className="text-sm text-slate-700 dark:text-[#e6edf3]">{row.label}</span>
                 {/* VyntRise column — highlighted */}
                 <div className="flex justify-center">
                   {row.us

@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* ── Tell Tailwind v4 to use .dark class strategy ── */
+@variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-serif: var(--font-serif), Georgia, serif;
@@ -40,6 +43,19 @@
     color: var(--color-foreground);
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+
+  /* ── Dark mode token overrides ── */
+  .dark {
+    --color-border: #21262d;
+    --color-background: #0d1117;
+    --color-foreground: #e6edf3;
+    --color-secondary: #161b22;
+    --color-secondary-foreground: #e6edf3;
+    --color-muted: #161b22;
+    --color-muted-foreground: #8b949e;
+    --color-accent: #161b22;
+    --color-accent-foreground: #e6edf3;
+  }
 }
 
 .glass-morphism {
@@ -49,12 +65,25 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.dark .glass-morphism {
+  background: rgba(22, 27, 34, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 .notion-card {
   @apply bg-white border border-slate-200 rounded-xl p-6 transition-all duration-200 hover:shadow-md hover:border-slate-300;
 }
 
+.dark .notion-card {
+  @apply bg-[#161b22] border-[#21262d] hover:border-[#30363d];
+}
+
 .github-badge {
   @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-mono font-medium bg-slate-100 text-slate-800 border border-slate-200;
+}
+
+.dark .github-badge {
+  @apply bg-[#161b22] text-[#8b949e] border-[#21262d];
 }
 
 .writing-mode-vertical {

@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { Zap, Twitter, Linkedin, Github, Instagram } from 'lucide-react';
 import CookieSettingsButton from '@/components/CookieSettingsButton';
+import VyntriseLogo from '@/components/VyntriseLogo';
 
 const serviceLinks = [
   { label: 'AI Search & Reputation', href: '/services/ai-search' },
@@ -25,10 +25,10 @@ const resourceLinks = [
 ];
 
 const socials = [
-  { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
-  { icon: Github, href: '#', label: 'GitHub' },
-  { icon: Instagram, href: '#', label: 'Instagram' },
+  { href: '#', label: 'Twitter',   icon: 'X'  },
+  { href: '#', label: 'LinkedIn',  icon: 'in' },
+  { href: '#', label: 'GitHub',    icon: 'gh' },
+  { href: '#', label: 'Instagram', icon: 'ig' },
 ];
 
 export default function Footer() {
@@ -41,24 +41,25 @@ export default function Footer() {
 
           {/* Brand col */}
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="inline-flex items-center gap-2 mb-5 group">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-white transition-transform group-hover:scale-105">
-                <Zap className="h-4 w-4 text-slate-900" />
-              </div>
-              <span className="text-lg font-mono font-bold text-white tracking-tighter">VyntRise</span>
+            <Link href="/" className="inline-flex items-center mb-5 group">
+              <VyntriseLogo theme="dark" height={26} className="transition-opacity group-hover:opacity-80" />
             </Link>
-            <p className="text-sm text-slate-500 leading-relaxed max-w-xs mb-6">
+            <p className="text-sm text-slate-500 leading-relaxed max-w-xs mb-4">
               Production-grade AI and automation that drives measurable outcomes from day one.
             </p>
+            <p className="text-xs text-slate-600 leading-relaxed mb-6">
+              205 Van Buren St, Suite 120, #063<br />
+              Herndon, VA 20170 · United States
+            </p>
             <div className="flex items-center gap-2">
-              {socials.map(({ icon: Icon, href, label }) => (
+              {socials.map(({ icon, href, label }) => (
                 <a
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="h-8 w-8 rounded-lg border border-slate-800 flex items-center justify-center text-slate-500 hover:text-white hover:border-slate-600 transition-colors"
+                  className="h-8 w-8 rounded-lg border border-slate-800 flex items-center justify-center text-slate-500 hover:text-white hover:border-slate-600 transition-colors text-[10px] font-bold"
                 >
-                  <Icon className="h-3.5 w-3.5" />
+                  {icon}
                 </a>
               ))}
             </div>
@@ -109,7 +110,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 text-xs text-slate-600">
-          <p>© 2026 VyntRise Technologies. All rights reserved.</p>
+          <p>© 2026 VyntRise LLC. All rights reserved.</p>
           <div className="flex items-center gap-5">
             <Link href="/privacy" className="hover:text-slate-400 transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-slate-400 transition-colors">Terms of Service</Link>

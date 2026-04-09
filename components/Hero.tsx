@@ -68,16 +68,16 @@ export default function Hero() {
   const taskCount = useCountUp(1351, 1284, 1400, 1000);
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-white flex items-center">
+    <section className="relative min-h-screen overflow-hidden bg-white dark:bg-[#0d1117] flex items-center">
 
       {/* ── Background ─────────────────────────────────────────── */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         {/* Hard split */}
-        <div className="absolute inset-y-0 right-0 w-[52%] bg-slate-950" />
+        <div className="absolute inset-y-0 right-0 w-[52%] bg-slate-950 dark:bg-[#0a0e14]" />
         {/* Soft blend seam */}
-        <div className="absolute inset-y-0 left-[44%] w-[16%] bg-gradient-to-r from-white to-slate-950" />
+        <div className="absolute inset-y-0 left-[44%] w-[16%] bg-gradient-to-r from-white dark:from-[#0d1117] to-slate-950 dark:to-[#0a0e14]" />
         {/* Dot grid — left only */}
-        <div className="absolute inset-y-0 left-0 w-[48%] bg-[radial-gradient(circle,_#94a3b815_1px,_transparent_1px)] bg-[size:24px_24px]" />
+        <div className="absolute inset-y-0 left-0 w-[48%] bg-[radial-gradient(circle,_#94a3b815_1px,_transparent_1px)] dark:bg-[radial-gradient(circle,_#ffffff08_1px,_transparent_1px)] bg-[size:24px_24px]" />
         {/* Subtle blue glow — right panel, static */}
         <div className="absolute right-[5%] top-[20%] h-[420px] w-[420px] rounded-full bg-blue-600/8 blur-[100px]" />
         <div className="absolute right-[20%] bottom-[10%] h-[280px] w-[320px] rounded-full bg-violet-600/8 blur-[90px]" />
@@ -95,16 +95,16 @@ export default function Hero() {
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-slate-200 bg-white px-4 py-1.5 shadow-sm"
+            className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-slate-200 dark:border-[#21262d] bg-white dark:bg-[#161b22] px-4 py-1.5 shadow-sm"
           >
             {/* Single ping — the ONLY blinking element on the page */}
             <span className="relative flex h-2 w-2 shrink-0">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
             </span>
-            <span className="text-xs font-semibold text-slate-600">3 agents running right now</span>
-            <span className="h-3.5 w-px bg-slate-200" />
-            <span className="text-xs font-mono text-slate-400">{taskCount.toLocaleString()} tasks today</span>
+            <span className="text-xs font-semibold text-slate-600 dark:text-[#e6edf3]">3 agents running right now</span>
+            <span className="h-3.5 w-px bg-slate-200 dark:bg-[#21262d]" />
+            <span className="text-xs font-mono text-slate-400 dark:text-[#8b949e]">{taskCount.toLocaleString()} tasks today</span>
           </motion.div>
 
           {/* Headline */}
@@ -112,7 +112,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-5xl sm:text-6xl lg:text-[4.25rem] font-extrabold tracking-tight text-slate-900 leading-[1.03] mb-6"
+            className="text-5xl sm:text-6xl lg:text-[4.25rem] font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.03] mb-6"
           >
             Your business,{' '}
             <span className="relative whitespace-nowrap">
@@ -134,7 +134,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
-            className="text-lg text-slate-500 leading-relaxed max-w-[440px] mb-10"
+            className="text-lg text-slate-500 dark:text-[#8b949e] leading-relaxed max-w-[440px] mb-10"
           >
             VyntRise deploys autonomous AI agents that handle your reputation, leads, workflows, and data — 24/7, without a single manual step.
           </motion.p>
@@ -148,14 +148,14 @@ export default function Hero() {
           >
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-2 rounded-xl bg-slate-900 px-7 py-3.5 text-sm font-bold text-white shadow-md hover:bg-slate-700 transition-colors"
+              className="group inline-flex items-center gap-2 rounded-xl bg-slate-900 dark:bg-[#4B6CF7] px-7 py-3.5 text-sm font-bold text-white shadow-md hover:bg-slate-700 dark:hover:bg-[#3d5ce0] transition-colors"
             >
               Start free — no card needed
               <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
             </Link>
             <Link
               href="/services"
-              className="inline-flex items-center gap-1.5 px-4 py-3.5 text-sm font-semibold text-slate-500 hover:text-slate-900 transition-colors"
+              className="inline-flex items-center gap-1.5 px-4 py-3.5 text-sm font-semibold text-slate-500 dark:text-[#8b949e] hover:text-slate-900 dark:hover:text-white transition-colors"
             >
               See how it works <ArrowRight className="h-3.5 w-3.5" />
             </Link>
@@ -174,10 +174,10 @@ export default function Hero() {
                 <div className="flex gap-0.5 mb-1">
                   {[...Array(5)].map((_, i) => <Star key={i} className="h-3 w-3 fill-amber-400 text-amber-400" />)}
                 </div>
-                <p className="text-xs text-slate-500 leading-relaxed">
+                <p className="text-xs text-slate-500 dark:text-[#8b949e] leading-relaxed">
                   &ldquo;250% traffic increase in 3 months. Review rating went from 3.8 to 4.7 stars.&rdquo;
                 </p>
-                <p className="text-[11px] font-semibold text-slate-700 mt-1">Sarah M. — Martinez Dental Group</p>
+                <p className="text-[11px] font-semibold text-slate-700 dark:text-[#e6edf3] mt-1">Sarah M. — Martinez Dental Group</p>
               </div>
             </div>
             <div className="flex items-center gap-2.5">
@@ -186,8 +186,8 @@ export default function Hero() {
                   <div key={i} className={`h-7 w-7 rounded-full border-2 border-white ${c}`} />
                 ))}
               </div>
-              <p className="text-xs text-slate-400">
-                Joined by <span className="font-semibold text-slate-700">500+ businesses</span>
+              <p className="text-xs text-slate-400 dark:text-[#8b949e]">
+                Joined by <span className="font-semibold text-slate-700 dark:text-white">500+ businesses</span>
               </p>
             </div>
           </motion.div>

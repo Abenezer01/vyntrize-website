@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CookieBanner from '@/components/CookieBanner';
 import CookieConsentProvider from '@/components/CookieConsentProvider';
+import ThemeProvider from '@/components/ThemeProvider';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -89,14 +90,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`scroll-smooth ${inter.variable} ${jetbrainsMono.variable} ${cormorantGaramond.variable}`}>
-      <body className="font-sans bg-white text-slate-900 antialiased flex flex-col min-h-screen">
-        <Header />
-        <CookieConsentProvider>
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <CookieBanner />
-        </CookieConsentProvider>
+    <html lang="en" suppressHydrationWarning className={`scroll-smooth ${inter.variable} ${jetbrainsMono.variable} ${cormorantGaramond.variable}`}>
+      <body className="font-sans bg-white dark:bg-[#0d1117] text-slate-900 dark:text-[#e6edf3] antialiased flex flex-col min-h-screen transition-colors duration-200">
+        <ThemeProvider>
+          <Header />
+          <CookieConsentProvider>
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <CookieBanner />
+          </CookieConsentProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
