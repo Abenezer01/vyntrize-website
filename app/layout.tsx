@@ -91,7 +91,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning className={`scroll-smooth ${inter.variable} ${jetbrainsMono.variable} ${cormorantGaramond.variable}`}>
-      <body className="font-sans bg-white dark:bg-[#0D1117] text-slate-900 dark:text-[#E6EDF3] antialiased flex flex-col min-h-screen transition-colors duration-200">
+      <body className="font-sans antialiased flex flex-col min-h-screen transition-colors duration-200" style={{ backgroundColor: 'var(--color-bg)', color: 'var(--color-text)' }}>
         <ThemeProvider>
           <Header />
           <CookieConsentProvider>

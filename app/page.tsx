@@ -544,7 +544,87 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 7. Why VyntRise comparison ── */}
+      {/* ── 7. Featured work ── */}
+      <section className="px-4 md:px-6 py-20" style={{ borderBottom: '1px solid var(--color-border)', backgroundColor: 'var(--color-surface)' }}>
+        <div className="container mx-auto max-w-6xl">
+          <div className="flex items-end justify-between gap-4 mb-10">
+            <div>
+              <div className="github-badge mb-3">OUR WORK</div>
+              <h2 className="text-3xl md:text-4xl font-extrabold" style={{ color: 'var(--color-text)' }}>
+                Results that speak for themselves
+              </h2>
+            </div>
+            <Link href="/work" className="hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold shrink-0 transition-colors" style={{ color: 'var(--color-primary)' }}>
+              View all work <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-5">
+            {[
+              {
+                client: 'Martinez Dental Group',
+                service: 'AI Search & Reputation',
+                result: '250% traffic increase. Review rating 3.8 → 4.7★ in 90 days.',
+                stat: '250%', statLabel: 'traffic increase',
+                color: 'text-blue-600', bg: 'bg-blue-50', bar: 'bg-blue-500',
+                initials: 'SM', author: 'Sarah M.', role: 'Owner',
+              },
+              {
+                client: 'Crestline SaaS',
+                service: 'Intelligent Automation',
+                result: 'AI agents boosted conversion rate by 40%. 20+ hours saved per week.',
+                stat: '+40%', statLabel: 'conversion rate',
+                color: 'text-violet-600', bg: 'bg-violet-50', bar: 'bg-violet-500',
+                initials: 'PN', author: 'Priya N.', role: 'VP Sales',
+              },
+              {
+                client: 'Meridian Logistics',
+                service: 'Data & Analytics',
+                result: 'Unified 6 data tools in 3 weeks. Reporting time cut from 8 hrs to 45 min.',
+                stat: '10x', statLabel: 'faster reporting',
+                color: 'text-amber-600', bg: 'bg-amber-50', bar: 'bg-amber-500',
+                initials: 'JO', author: 'James O.', role: 'COO',
+              },
+            ].map((item, i) => (
+              <motion.div
+                key={item.client}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                className="rounded-2xl flex flex-col overflow-hidden"
+                style={{ border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg)' }}
+              >
+                <div className="p-5 flex-1">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-xs font-semibold" style={{ color: 'var(--color-text-muted)' }}>{item.service}</span>
+                    <span className={`text-2xl font-extrabold font-mono ${item.color}`}>{item.stat}</span>
+                  </div>
+                  <p className="text-sm font-bold mb-2" style={{ color: 'var(--color-text)' }}>{item.client}</p>
+                  <p className="text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>{item.result}</p>
+                </div>
+                <div className="px-5 pb-5 flex items-center gap-2.5">
+                  <div className={`h-7 w-7 rounded-full ${item.bar} flex items-center justify-center text-white text-[10px] font-bold shrink-0`}>
+                    {item.initials}
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold" style={{ color: 'var(--color-text)' }}>{item.author}</p>
+                    <p className="text-[11px]" style={{ color: 'var(--color-text-muted)' }}>{item.role}, {item.client}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="mt-8 text-center sm:hidden">
+            <Link href="/work" className="inline-flex items-center gap-1.5 text-sm font-semibold" style={{ color: 'var(--color-primary)' }}>
+              View all case studies <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 8. Why VyntRise comparison ── */}
       <section className="px-4 md:px-6 py-24 border-b border-slate-100 dark:border-[#21262d]">
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-12">
