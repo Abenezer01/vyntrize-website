@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   ArrowRight, Search, Bot, Code, Database,
@@ -234,10 +234,43 @@ export default function Home() {
   const [activeService, setActiveService] = useState(services[0].id);
   const current = services.find(s => s.id === activeService)!;
   const CIcon = current.icon;
+{/* Vyntrise — Agent Ops booking chatbot */}
+
+
+useEffect(() => {
+  const iframe = document.getElementById("agentops-chatbot-ab7b7522") as HTMLIFrameElement | null;
+  if (!iframe) return;
+  const onMessage = (event: MessageEvent) => {
+    if (!event.data || event.source !== iframe.contentWindow) return;
+    if (event.data.type !== "agentops-chatbot-state") return;
+    const open = Boolean(event.data.open);
+    iframe.style.width = open ? "400px" : "80px";
+    iframe.style.height = open ? "min(820px, 100dvh)" : "80px";
+  };
+  window.addEventListener("message", onMessage);
+  return () => window.removeEventListener("message", onMessage);
+}, []);
 
   return (
+    
     <div className="flex flex-col bg-white dark:bg-[#0d1117]">
-
+<iframe
+  id="agentops-chatbot-ab7b7522"
+  src="https://animator-briskness-canister.ngrok-free.dev/embed/chatbot?org=d7b14163-e1b2-47bd-9c99-225458dc3381"
+  title="Booking assistant"
+  style={{
+    position: "fixed",
+    right: 16,
+    bottom: 16,
+    width: 80,
+    height: 80,
+    maxWidth: "calc(100vw - 32px)",
+    border: 0,
+    background: "transparent",
+    zIndex: 2147483647,
+  }}
+  loading="lazy"
+/>
       {/* ── 1. Hero ── */}
       <Hero />
 
