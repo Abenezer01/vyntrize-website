@@ -528,54 +528,7 @@ useEffect(() => {
         </div>
       </section>
 
-      {/* ── 6. Testimonials ── */}
-      <section className="py-24 bg-slate-50/60 dark:bg-[#161b22] border-b border-slate-100 dark:border-[#21262d] overflow-hidden">
-        <div className="container mx-auto max-w-6xl px-4 md:px-6 mb-12 text-center">
-          <div className="github-badge mb-4">TESTIMONIALS</div>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-3">
-            Loved by teams that ship
-          </h2>
-          <p className="text-slate-500 dark:text-[#8b949e] max-w-md mx-auto text-sm">Real results from real businesses. No cherry-picked metrics.</p>
-        </div>
-
-        {/* Two-row marquee — row 1 forward, row 2 reverse (Clerk/Resend style) */}
-        <div className="flex flex-col gap-4">
-          {[testimonials, [...testimonials].reverse()].map((row, rowIdx) => (
-            <div key={rowIdx} className="relative overflow-hidden">
-              <div className="pointer-events-none absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-slate-50 to-transparent z-10" />
-              <div className="pointer-events-none absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-slate-50 to-transparent z-10" />
-              <motion.div
-                animate={{ x: rowIdx === 0 ? ['0%', '-50%'] : ['-50%', '0%'] }}
-                transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
-                className="flex shrink-0 gap-4"
-              >
-                {[...row, ...row].map((t, i) => (
-                  <div
-                    key={i}
-                    className="w-72 shrink-0 rounded-2xl border border-slate-200 dark:border-[#21262d] bg-white dark:bg-[#0d1117] p-5 shadow-sm"
-                  >
-                    <div className="flex gap-0.5 mb-3">
-                      {[...Array(5)].map((_, j) => (
-                        <Star key={j} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
-                      ))}
-                    </div>
-                    <p className="text-sm text-slate-700 leading-relaxed mb-4">&ldquo;{t.quote}&rdquo;</p>
-                    <div className="flex items-center gap-2.5">
-                      <div className={`h-8 w-8 rounded-full ${t.color} flex items-center justify-center text-white text-[10px] font-bold shrink-0`}>
-                        {t.initials}
-                      </div>
-                      <div>
-                        <p className="text-xs font-semibold text-slate-900">{t.name}</p>
-                        <p className="text-[11px] text-slate-400">{t.role}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </motion.div>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* ── 6. Testimonials — removed, using real work showcase instead ── */}
 
       {/* ── 7. Featured work ── */}
       <section className="px-4 md:px-6 py-20" style={{ borderBottom: '1px solid var(--color-border)', backgroundColor: 'var(--color-surface)' }}>
@@ -584,7 +537,7 @@ useEffect(() => {
             <div>
               <div className="github-badge mb-3">OUR WORK</div>
               <h2 className="text-3xl md:text-4xl font-extrabold" style={{ color: 'var(--color-text)' }}>
-                Results that speak for themselves
+                Work we&apos;re proud of
               </h2>
             </div>
             <Link href="/work" className="hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold shrink-0 transition-colors" style={{ color: 'var(--color-primary)' }}>
@@ -595,28 +548,31 @@ useEffect(() => {
           <div className="grid md:grid-cols-3 gap-5">
             {[
               {
-                client: 'Martinez Dental Group',
-                service: 'AI Search & Reputation',
-                result: '250% traffic increase. Review rating 3.8 → 4.7★ in 90 days.',
-                stat: '250%', statLabel: 'traffic increase',
-                color: 'text-blue-600', bg: 'bg-blue-50', bar: 'bg-blue-500',
-                initials: 'SM', author: 'Sarah M.', role: 'Owner',
+                slug: 'habesha-food',
+                client: 'Habesha Food',
+                service: 'Web Design & Development',
+                tagline: 'A full digital presence for an authentic Ethiopian restaurant.',
+                image: '/images/work/Habesha%20Food/photo_2026-04-09_16-23-33.jpg',
+                color: 'bg-emerald-500',
+                initials: 'HF',
               },
               {
-                client: 'Crestline SaaS',
-                service: 'Intelligent Automation',
-                result: 'AI agents boosted conversion rate by 40%. 20+ hours saved per week.',
-                stat: '+40%', statLabel: 'conversion rate',
-                color: 'text-violet-600', bg: 'bg-violet-50', bar: 'bg-violet-500',
-                initials: 'PN', author: 'Priya N.', role: 'VP Sales',
+                slug: 'liya-cookies',
+                client: 'Liya Cookies',
+                service: 'Web Design & Development',
+                tagline: 'A delightful online presence for a boutique cookie brand.',
+                image: '/images/work/Liya%20Cookies/photo_2026-04-09_16-23-32.jpg',
+                color: 'bg-rose-500',
+                initials: 'LC',
               },
               {
-                client: 'Meridian Logistics',
-                service: 'Data & Analytics',
-                result: 'Unified 6 data tools in 3 weeks. Reporting time cut from 8 hrs to 45 min.',
-                stat: '10x', statLabel: 'faster reporting',
-                color: 'text-amber-600', bg: 'bg-amber-50', bar: 'bg-amber-500',
-                initials: 'JO', author: 'James O.', role: 'COO',
+                slug: 'nazaret-market',
+                client: 'Nazaret Market',
+                service: 'Brand Identity & Web Design',
+                tagline: 'A modern digital storefront for a community grocery market.',
+                image: '/images/work/NAZARET%20MARKET/1.png',
+                color: 'bg-amber-500',
+                initials: 'NM',
               },
             ].map((item, i) => (
               <motion.div
@@ -625,33 +581,43 @@ useEffect(() => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="rounded-2xl flex flex-col overflow-hidden"
-                style={{ border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg)' }}
               >
-                <div className="p-5 flex-1">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs font-semibold" style={{ color: 'var(--color-text-muted)' }}>{item.service}</span>
-                    <span className={`text-2xl font-extrabold font-mono ${item.color}`}>{item.stat}</span>
+                <Link
+                  href={`/work/${item.slug}`}
+                  className="group flex flex-col rounded-2xl overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-lg"
+                  style={{ border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg)' }}
+                >
+                  {/* Image */}
+                  <div className="relative h-44 overflow-hidden" style={{ backgroundColor: 'var(--color-raised)' }}>
+                    <img
+                      src={item.image}
+                      alt={item.client}
+                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-black/40 to-transparent" />
                   </div>
-                  <p className="text-sm font-bold mb-2" style={{ color: 'var(--color-text)' }}>{item.client}</p>
-                  <p className="text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>{item.result}</p>
-                </div>
-                <div className="px-5 pb-5 flex items-center gap-2.5">
-                  <div className={`h-7 w-7 rounded-full ${item.bar} flex items-center justify-center text-white text-[10px] font-bold shrink-0`}>
-                    {item.initials}
+                  {/* Body */}
+                  <div className="p-4 flex-1">
+                    <p className="text-[11px] font-semibold mb-1" style={{ color: 'var(--color-text-muted)' }}>{item.service}</p>
+                    <p className="text-sm font-bold mb-1" style={{ color: 'var(--color-text)' }}>{item.client}</p>
+                    <p className="text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>{item.tagline}</p>
                   </div>
-                  <div>
-                    <p className="text-xs font-semibold" style={{ color: 'var(--color-text)' }}>{item.author}</p>
-                    <p className="text-[11px]" style={{ color: 'var(--color-text-muted)' }}>{item.role}, {item.client}</p>
+                  <div className="px-4 pb-4 flex items-center justify-between">
+                    <div className={`h-6 w-6 rounded-full ${item.color} flex items-center justify-center text-white text-[9px] font-bold`}>
+                      {item.initials}
+                    </div>
+                    <span className="text-xs font-semibold flex items-center gap-1 group-hover:gap-1.5 transition-all" style={{ color: 'var(--color-primary)' }}>
+                      View project <ArrowRight className="h-3 w-3" />
+                    </span>
                   </div>
-                </div>
+                </Link>
               </motion.div>
             ))}
           </div>
 
           <div className="mt-8 text-center sm:hidden">
             <Link href="/work" className="inline-flex items-center gap-1.5 text-sm font-semibold" style={{ color: 'var(--color-primary)' }}>
-              View all case studies <ArrowRight className="h-4 w-4" />
+              View all work <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>

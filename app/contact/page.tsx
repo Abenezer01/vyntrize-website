@@ -1,12 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Link from 'next/link';
 import { motion } from 'motion/react';
 import {
   ArrowRight, Mail, MessageSquare, Clock, CheckCircle2,
   MapPin, Search, Bot, Code, Database, Sparkles,
 } from 'lucide-react';
+import { saveLead } from '@/lib/leads';
 
 const intents = [
   { id: 'ai-search',        label: 'AI Search & Reputation', icon: Search },
@@ -40,9 +41,20 @@ const emails = [
 export default function Contact() {
   const [selected, setSelected] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
-  function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    saveLead({
+      firstName: data.get('firstName') as string,
+      lastName:  data.get('lastName')  as string,
+      email:     data.get('email')     as string,
+      company:   data.get('company')   as string || undefined,
+      message:   data.get('message')   as string,
+      service:   selected ? intents.find(i => i.id === selected)?.label : undefined,
+    });
     setSubmitted(true);
   }
 
@@ -95,7 +107,7 @@ export default function Contact() {
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="p-7 space-y-6">
+                <form onSubmit={handleSubmit} ref={formRef} className="p-7 space-y-6">
                   {/* Intent chips */}
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">
@@ -128,7 +140,7 @@ export default function Contact() {
                     <div className="space-y-1.5">
                       <label htmlFor="firstName" className="text-xs font-semibold text-slate-700">First name</label>
                       <input
-                        type="text" id="firstName" required
+                        type="text" id="firstName" name="firstName" required
                         placeholder="Alex"
                         className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
                       />
@@ -136,7 +148,7 @@ export default function Contact() {
                     <div className="space-y-1.5">
                       <label htmlFor="lastName" className="text-xs font-semibold text-slate-700">Last name</label>
                       <input
-                        type="text" id="lastName" required
+                        type="text" id="lastName" name="lastName" required
                         placeholder="Rivera"
                         className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
                       />
@@ -148,7 +160,7 @@ export default function Contact() {
                     <div className="space-y-1.5">
                       <label htmlFor="email" className="text-xs font-semibold text-slate-700">Work email</label>
                       <input
-                        type="email" id="email" required
+                        type="email" id="email" name="email" required
                         placeholder="alex@company.com"
                         className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
                       />
@@ -156,7 +168,7 @@ export default function Contact() {
                     <div className="space-y-1.5">
                       <label htmlFor="company" className="text-xs font-semibold text-slate-700">Company</label>
                       <input
-                        type="text" id="company"
+                        type="text" id="company" name="company"
                         placeholder="Acme Inc."
                         className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
                       />
@@ -169,7 +181,7 @@ export default function Contact() {
                       What&apos;s your biggest challenge right now?
                     </label>
                     <textarea
-                      id="message" rows={4} required
+                      id="message" name="message" rows={4} required
                       placeholder="Describe what you're trying to solve or build..."
                       className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all resize-none"
                     />

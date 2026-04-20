@@ -82,7 +82,7 @@ export default function Header() {
 
   const flatLinks = [
     { name: 'Work',    href: '/work',    isActive: isWorkActive    },
-    { name: 'Pricing', href: '/pricing', isActive: pathname === '/pricing' },
+    // { name: 'Pricing', href: '/pricing', isActive: pathname === '/pricing' },
     { name: 'About',   href: '/about',   isActive: pathname === '/about'   },
   ];
 

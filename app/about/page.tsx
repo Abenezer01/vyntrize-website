@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import InitialsAvatar from '@/components/InitialsAvatar';
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'motion/react';
 import {
@@ -111,7 +112,7 @@ const team = [
     initials: 'AB',
     color: 'bg-blue-500',
     tag: 'Founder & CEO',
-    photo: 'https://i.pravatar.cc/200?img=68',
+    photo: null, // No photo yet — renders InitialsAvatar
     linkedin: '#',
   },
   {
@@ -458,7 +459,11 @@ const portfolioBar: Record<string, string> = {
               >
                 <div className="flex flex-col items-center text-center mb-4">
                   <div className="relative h-24 w-24 mb-3 shrink-0">
-                    <Image src={member.photo} alt={member.name} width={96} height={96} className="rounded-full object-cover ring-4 ring-slate-100 dark:ring-[#21262d] w-full h-full" />
+                    {member.photo ? (
+                      <Image src={member.photo} alt={member.name} width={96} height={96} className="rounded-full object-cover ring-4 ring-slate-100 dark:ring-[#21262d] w-full h-full" />
+                    ) : (
+                      <InitialsAvatar initials={member.initials} name={member.name} size={96} className="rounded-full ring-4 ring-slate-100 dark:ring-[#21262d]" />
+                    )}
                   </div>
                   <div>
                     <p className="text-sm font-bold text-slate-900 dark:text-white">{member.name}</p>
