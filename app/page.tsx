@@ -15,7 +15,7 @@ import Hero from '@/components/Hero';
    DATA
 ───────────────────────────────────────── */
 
-const logos = [
+/* const logos = [
   { name: 'Acme Corp',  abbr: 'AC' },
   { name: 'NovaTech',   abbr: 'NT' },
   { name: 'Meridian',   abbr: 'ME' },
@@ -26,7 +26,7 @@ const logos = [
   { name: 'Vantage',    abbr: 'VA' },
   { name: 'Pinnacle',   abbr: 'PI' },
   { name: 'Solaris',    abbr: 'SO' },
-];
+]; */
 
 const steps = [
   {
@@ -274,31 +274,7 @@ useEffect(() => {
       {/* ── 1. Hero ── */}
       <Hero />
 
-      {/* ── 2. Logo strip ── */}
-      <section className="border-y border-slate-100 dark:border-[#21262d] bg-white dark:bg-[#0d1117] py-10 overflow-hidden">
-        <p className="text-center text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-[#8b949e] mb-7">
-          Trusted by 500+ businesses worldwide
-        </p>
-        {/* Fade edges */}
-        <div className="relative">
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-white to-transparent z-10" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white to-transparent z-10" />
-          <motion.div
-            animate={{ x: ['0%', '-50%'] }}
-            transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-            className="flex shrink-0 gap-10 items-center"
-          >
-            {[...logos, ...logos].map((logo, i) => (
-              <div key={i} className="flex items-center gap-2.5 shrink-0 opacity-40 hover:opacity-70 transition-opacity">
-                <div className="h-7 w-7 rounded-lg bg-slate-900 flex items-center justify-center">
-                  <span className="text-[9px] font-bold text-white font-mono">{logo.abbr}</span>
-                </div>
-                <span className="text-sm font-semibold text-slate-600 whitespace-nowrap">{logo.name}</span>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+      {/* ── 2. Logo strip — removed ── */}
 
       {/* ── 3. How it works ── */}
       <section className="px-4 md:px-6 py-24 border-b border-slate-100 dark:border-[#21262d]">

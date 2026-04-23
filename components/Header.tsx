@@ -80,6 +80,8 @@ export default function Header() {
   const isResourcesActive = pathname.startsWith('/faq') || pathname.startsWith('/support');
   const isWorkActive      = pathname.startsWith('/work');
 
+  const isSeoActive       = pathname.startsWith('/seo-analyzer');
+
   const flatLinks = [
     { name: 'Work',    href: '/work',    isActive: isWorkActive    },
     // { name: 'Pricing', href: '/pricing', isActive: pathname === '/pricing' },
@@ -160,6 +162,26 @@ export default function Header() {
               {link.name}
             </Link>
           ))}
+
+          {/* SEO Analyzer — free tool */}
+          <a
+            href="https://vyntrise.com/en"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-md transition-colors"
+            style={{
+              backgroundColor: isSeoActive ? 'var(--color-surface)' : 'transparent',
+              color: isSeoActive ? 'var(--color-text)' : 'var(--color-text-muted)',
+            }}
+          >
+            SEO Analyzer
+            <span
+              className="text-[9px] font-bold rounded-full px-1.5 py-0.5 leading-none"
+              style={{ backgroundColor: 'var(--color-primary)', color: '#fff' }}
+            >
+              FREE
+            </span>
+          </a>
 
           {/* Resources dropdown */}
           <NavDropdown label="Resources" isActive={isResourcesActive}>
@@ -271,6 +293,21 @@ export default function Header() {
                   {link.name}
                 </Link>
               ))}
+
+              {/* SEO Analyzer — mobile */}
+              <a href="https://vyntrise.com/en" target="_blank" rel="noopener noreferrer"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center gap-2 px-3 py-2.5 text-sm font-medium rounded-lg transition-colors"
+                style={{
+                  color: 'var(--color-text-muted)',
+                }}
+              >
+                SEO Analyzer
+                <span className="text-[9px] font-bold rounded-full px-1.5 py-0.5 leading-none"
+                  style={{ backgroundColor: 'var(--color-primary)', color: '#fff' }}>
+                  FREE
+                </span>
+              </a>
 
               <div className="mt-3 pt-3 flex flex-col gap-2" style={{ borderTop: '1px solid var(--color-border)' }}>
                 <Link href="/contact" onClick={() => setMobileOpen(false)}
