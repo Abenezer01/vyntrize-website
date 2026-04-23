@@ -263,7 +263,7 @@ export default function Hero() {
             </div>
 
             {/* Reputation ring + metrics row */}
-            <div className="flex items-center gap-0 divide-x" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', divideColor: 'rgba(255,255,255,0.06)' }}>
+            <div className="flex items-center gap-0 divide-x divide-white/8" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
 
               {/* Reputation ring — hero metric */}
               <div className="flex flex-col items-center justify-center px-6 py-5 gap-1 relative">
@@ -277,7 +277,7 @@ export default function Hero() {
               </div>
 
               {/* Tasks + Agents */}
-              <div className="flex-1 grid grid-cols-2 divide-x" style={{ divideColor: 'rgba(255,255,255,0.06)' }}>
+              <div className="flex-1 grid grid-cols-2 divide-x divide-white/8">
                 {[
                   { label: 'Tasks today', value: taskCount.toLocaleString(), color: '#41A5FF', Icon: Activity },
                   { label: 'Agents active', value: '3', color: '#a78bfa', Icon: Bot },
@@ -328,7 +328,7 @@ export default function Hero() {
             </div>
 
             {/* Footer stats row */}
-            <div className="grid grid-cols-3 divide-x" style={{ borderTop: '1px solid rgba(255,255,255,0.06)', divideColor: 'rgba(255,255,255,0.06)' }}>
+            <div className="grid grid-cols-3 divide-x divide-white/8" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
               {[
                 { value: '20+ hrs', label: 'saved / week',  color: '#41A5FF'  },
                 { value: '< 30d',   label: 'first results', color: '#34d399'  },
