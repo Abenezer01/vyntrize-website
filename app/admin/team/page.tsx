@@ -45,15 +45,23 @@ export default function AdminTeam() {
               style={{ borderBottom: i < team.length - 1 ? '1px solid var(--color-border)' : 'none' }}>
 
               {/* Avatar */}
-              <div className="relative h-9 w-9 rounded-full overflow-hidden">
-                <Image
-                  src={member.photo}
-                  alt={member.name}
-                  fill
-                  className="object-cover"
-                  sizes="36px"
-                  onError={() => {}}
-                />
+              <div className="relative h-9 w-9 rounded-full overflow-hidden shrink-0">
+                {member.photo ? (
+                  <Image
+                    src={member.photo}
+                    alt={member.name}
+                    fill
+                    className="object-cover"
+                    sizes="36px"
+                  />
+                ) : (
+                  <div
+                    className="h-full w-full flex items-center justify-center text-white text-[10px] font-bold"
+                    style={{ background: 'linear-gradient(135deg, #41A5FF, #2A52BE)' }}
+                  >
+                    {member.initials}
+                  </div>
+                )}
               </div>
 
               <p className="text-sm font-semibold" style={{ color: 'var(--color-text)' }}>{member.name}</p>

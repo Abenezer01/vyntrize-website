@@ -162,7 +162,7 @@ const team = [
     initials: 'MG',
     color: 'bg-cyan-500',
     tag: 'Business Development',
-    photo: '/images/teams/Mahlet Getachew .jpg',
+    photo: '/images/teams/Mahlet Getachew .jpg', 
     linkedin: '#',
   },
   {
