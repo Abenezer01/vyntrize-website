@@ -1,9 +1,8 @@
-// Vyntrize Website CRM Database Schema
-// This schema manages contact form submissions and lead tracking
+// Vyntrize Website Database Schema
+// Stores contact form submissions for CRM import
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../node_modules/.prisma/client"
 }
 
 datasource db {

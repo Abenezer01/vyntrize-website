@@ -2,25 +2,28 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Users, Briefcase, TrendingUp, Clock, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Users, TrendingUp, Clock, CheckCircle2, ArrowRight } from 'lucide-react';
 import { getLeads, type Lead, statusColors, statusLabels } from '@/lib/leads';
 
 export default function AdminDashboard() {
   const [leads, setLeads] = useState<Lead[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => { setLeads(getLeads()); }, []);
+  useEffect(() => {
+    getLeads().then(data => { setLeads(data); setLoading(false); });
+  }, []);
 
-  const newLeads      = leads.filter(l => l.status === 'new').length;
-  const qualified     = leads.filter(l => l.status === 'qualified').length;
-  const closed        = leads.filter(l => l.status === 'closed').length;
-  const convRate      = leads.length ? Math.round((closed / leads.length) * 100) : 0;
-  const recent        = leads.slice(0, 5);
+  const newLeads = leads.filter(l => l.status === 'NEW').length;
+  const qualified = leads.filter(l => l.status === 'QUALIFIED').length;
+  const won = leads.filter(l => l.status === 'WON').length;
+  const convRate = leads.length ? Math.round((won / leads.length) * 100) : 0;
+  const recent = leads.slice(0, 5);
 
   const stats = [
-    { label: 'Total leads',      value: leads.length,  icon: Users,       color: 'text-blue-600',    bg: 'bg-blue-50'    },
-    { label: 'New this session', value: newLeads,       icon: Clock,       color: 'text-violet-600',  bg: 'bg-violet-50'  },
-    { label: 'Qualified',        value: qualified,      icon: TrendingUp,  color: 'text-amber-600',   bg: 'bg-amber-50'   },
-    { label: 'Closed / Won',     value: closed,         icon: CheckCircle2,color: 'text-emerald-600', bg: 'bg-emerald-50' },
+    { label: 'Total leads', value: leads.length, icon: Users, color: 'text-blue-600', bg: 'bg-blue-50' },
+    { label: 'New', value: newLeads, icon: Clock, color: 'text-violet-600', bg: 'bg-violet-50' },
+    { label: 'Qualified', value: qualified, icon: TrendingUp, color: 'text-amber-600', bg: 'bg-amber-50' },
+    { label: 'Won', value: won, icon: CheckCircle2, color: 'text-emerald-600', bg: 'bg-emerald-50' },
   ];
 
   return (
@@ -39,14 +42,16 @@ export default function AdminDashboard() {
               <div className={`h-9 w-9 rounded-lg flex items-center justify-center mb-3 ${s.bg}`}>
                 <Icon className={`h-4 w-4 ${s.color}`} />
               </div>
-              <p className="text-2xl font-extrabold" style={{ color: 'var(--color-text)' }}>{s.value}</p>
+              <p className="text-2xl font-extrabold" style={{ color: 'var(--color-text)' }}>
+                {loading ? '—' : s.value}
+              </p>
               <p className="text-xs mt-0.5" style={{ color: 'var(--color-text-muted)' }}>{s.label}</p>
             </div>
           );
         })}
       </div>
 
-      {/* Conversion rate bar */}
+      {/* Conversion rate */}
       <div className="rounded-2xl p-5" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
         <div className="flex items-center justify-between mb-3">
           <p className="text-sm font-semibold" style={{ color: 'var(--color-text)' }}>Conversion rate</p>
@@ -55,7 +60,9 @@ export default function AdminDashboard() {
         <div className="h-2 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--color-raised)' }}>
           <div className="h-full rounded-full bg-emerald-500 transition-all" style={{ width: `${convRate}%` }} />
         </div>
-        <p className="text-xs mt-2" style={{ color: 'var(--color-text-muted)' }}>{closed} closed out of {leads.length} total leads</p>
+        <p className="text-xs mt-2" style={{ color: 'var(--color-text-muted)' }}>
+          {won} won out of {leads.length} total leads
+        </p>
       </div>
 
       {/* Recent leads */}
@@ -66,7 +73,12 @@ export default function AdminDashboard() {
             View all <ArrowRight className="h-3 w-3" />
           </Link>
         </div>
-        {recent.length === 0 ? (
+
+        {loading ? (
+          <div className="px-5 py-10 text-center" style={{ backgroundColor: 'var(--color-bg)' }}>
+            <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>Loading...</p>
+          </div>
+        ) : recent.length === 0 ? (
           <div className="px-5 py-10 text-center" style={{ backgroundColor: 'var(--color-bg)' }}>
             <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>No leads yet. They&apos;ll appear here when someone submits the contact form.</p>
           </div>
@@ -83,7 +95,7 @@ export default function AdminDashboard() {
                     {lead.firstName} {lead.lastName}
                   </p>
                   <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-                    {lead.email} {lead.company ? `· ${lead.company}` : ''}
+                    {lead.email}{lead.company ? ` · ${lead.company}` : ''}
                   </p>
                 </div>
                 <div className="flex items-center gap-3">

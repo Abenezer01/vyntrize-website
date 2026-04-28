@@ -1,11 +1,3 @@
-import { PrismaClient } from '@prisma/client';
-
-const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
-
-export const prisma =
-    globalForPrisma.prisma ??
-    new PrismaClient({
-        log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
-    });
-
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
+// Re-export the shared Vyntrize database client from @platform/vyntrize-db
+// The client connects to vyntrize_db via VYNTRIZE_DATABASE_URL
+export { vyntrizeDb as prisma } from '@platform/vyntrize-db';

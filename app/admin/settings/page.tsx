@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { adminLogout } from '@/lib/admin-auth';
+import { deleteAllLeads } from '@/lib/leads';
 import { LogOut, ExternalLink, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -13,9 +14,9 @@ export default function AdminSettings() {
     router.replace('/admin/login');
   }
 
-  function handleClearLeads() {
-    if (!confirm('Delete ALL leads? This cannot be undone.')) return;
-    localStorage.removeItem('vr_leads');
+  async function handleClearLeads() {
+    if (!confirm('Delete ALL leads from the database? This cannot be undone.')) return;
+    await deleteAllLeads();
     alert('All leads deleted.');
   }
 

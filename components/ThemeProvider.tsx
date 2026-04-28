@@ -9,7 +9,7 @@ interface ThemeContextValue {
   toggle: () => void;
 }
 
-const ThemeContext = createContext<ThemeContextValue>({ theme: 'light', toggle: () => {} });
+const ThemeContext = createContext<ThemeContextValue>({ theme: 'light', toggle: () => { } });
 
 export function useTheme() {
   return useContext(ThemeContext);
@@ -22,8 +22,10 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
   useEffect(() => {
     const saved = localStorage.getItem('vr-theme') as Theme | null;
     if (saved) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setTheme(saved);
     } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setTheme('dark');
     }
   }, []);

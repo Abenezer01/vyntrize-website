@@ -65,7 +65,7 @@ const services = [
     color: 'blue',
     visual: [
       { label: 'Google ranking', before: 18, after: 3, unit: '#' },
-      { label: 'Review score',   before: 38, after: 47, unit: '★', scale: 10 },
+      { label: 'Review score', before: 38, after: 47, unit: '★', scale: 10 },
       { label: 'Monthly visits', before: 420, after: 1470, unit: '' },
     ],
   },
@@ -81,8 +81,8 @@ const services = [
     color: 'violet',
     visual: [
       { label: 'Leads followed up', before: 12, after: 100, unit: '%' },
-      { label: 'Hours saved / wk',  before: 0,  after: 22,  unit: 'h' },
-      { label: 'Response time',     before: 240, after: 2,  unit: 'min' },
+      { label: 'Hours saved / wk', before: 0, after: 22, unit: 'h' },
+      { label: 'Response time', before: 240, after: 2, unit: 'min' },
     ],
   },
   {
@@ -97,8 +97,8 @@ const services = [
     color: 'emerald',
     visual: [
       { label: 'On-time delivery', before: 60, after: 95, unit: '%' },
-      { label: 'Manual steps cut',  before: 0,  after: 80, unit: '%' },
-      { label: 'Deploy time',       before: 14, after: 3,  unit: 'd' },
+      { label: 'Manual steps cut', before: 0, after: 80, unit: '%' },
+      { label: 'Deploy time', before: 14, after: 3, unit: 'd' },
     ],
   },
   {
@@ -112,9 +112,9 @@ const services = [
     href: '/services/data-architecture',
     color: 'amber',
     visual: [
-      { label: 'Report time',      before: 480, after: 45,  unit: 'min' },
-      { label: 'Data sources',     before: 1,   after: 12,  unit: '' },
-      { label: 'Accuracy',         before: 71,  after: 99,  unit: '%' },
+      { label: 'Report time', before: 480, after: 45, unit: 'min' },
+      { label: 'Data sources', before: 1, after: 12, unit: '' },
+      { label: 'Accuracy', before: 71, after: 99, unit: '%' },
     ],
   },
 ];
@@ -129,41 +129,41 @@ const testimonials = [
 ];
 
 const comparisons = [
-  { label: 'Results in < 30 days',        us: true  },
-  { label: 'Outcome-based pricing',        us: true  },
-  { label: 'Explainable AI systems',       us: true  },
-  { label: 'Dedicated success manager',    us: true  },
-  { label: 'SOC 2 / HIPAA compliant',      us: true  },
-  { label: 'Lock-in annual contracts',     us: false },
-  { label: 'Black-box automation',         us: false },
-  { label: 'Months-long onboarding',       us: false },
+  { label: 'Results in < 30 days', us: true },
+  { label: 'Outcome-based pricing', us: true },
+  { label: 'Explainable AI systems', us: true },
+  { label: 'Dedicated success manager', us: true },
+  { label: 'SOC 2 / HIPAA compliant', us: true },
+  { label: 'Lock-in annual contracts', us: false },
+  { label: 'Black-box automation', us: false },
+  { label: 'Months-long onboarding', us: false },
 ];
 
 const colorMap: Record<string, string> = {
-  blue:    'bg-blue-50 text-blue-600 border-blue-100',
-  violet:  'bg-violet-50 text-violet-600 border-violet-100',
+  blue: 'bg-blue-50 text-blue-600 border-blue-100',
+  violet: 'bg-violet-50 text-violet-600 border-violet-100',
   emerald: 'bg-emerald-50 text-emerald-600 border-emerald-100',
-  amber:   'bg-amber-50 text-amber-600 border-amber-100',
+  amber: 'bg-amber-50 text-amber-600 border-amber-100',
 };
 
 const tabAccent: Record<string, string> = {
-  blue:    'border-blue-600 text-blue-600',
-  violet:  'border-violet-600 text-violet-600',
+  blue: 'border-blue-600 text-blue-600',
+  violet: 'border-violet-600 text-violet-600',
   emerald: 'border-emerald-600 text-emerald-600',
-  amber:   'border-amber-600 text-amber-600',
+  amber: 'border-amber-600 text-amber-600',
 };
 
 const stepColor: Record<string, string> = {
-  blue:    'bg-blue-50 text-blue-600 border-blue-100',
-  violet:  'bg-violet-50 text-violet-600 border-violet-100',
+  blue: 'bg-blue-50 text-blue-600 border-blue-100',
+  violet: 'bg-violet-50 text-violet-600 border-violet-100',
   emerald: 'bg-emerald-50 text-emerald-600 border-emerald-100',
 };
 
 const barColor: Record<string, string> = {
-  blue:    'bg-blue-500',
-  violet:  'bg-violet-500',
+  blue: 'bg-blue-500',
+  violet: 'bg-violet-500',
   emerald: 'bg-emerald-500',
-  amber:   'bg-amber-500',
+  amber: 'bg-amber-500',
 };
 
 /* ─────────────────────────────────────────
@@ -234,43 +234,43 @@ export default function Home() {
   const [activeService, setActiveService] = useState(services[0].id);
   const current = services.find(s => s.id === activeService)!;
   const CIcon = current.icon;
-{/* Vyntrise — Agent Ops booking chatbot */}
+  {/* Vyntrise — Agent Ops booking chatbot */ }
 
 
-useEffect(() => {
-  const iframe = document.getElementById("agentops-chatbot-ab7b7522") as HTMLIFrameElement | null;
-  if (!iframe) return;
-  const onMessage = (event: MessageEvent) => {
-    if (!event.data || event.source !== iframe.contentWindow) return;
-    if (event.data.type !== "agentops-chatbot-state") return;
-    const open = Boolean(event.data.open);
-    iframe.style.width = open ? "400px" : "80px";
-    iframe.style.height = open ? "min(820px, 100dvh)" : "80px";
-  };
-  window.addEventListener("message", onMessage);
-  return () => window.removeEventListener("message", onMessage);
-}, []);
+  useEffect(() => {
+    const iframe = document.getElementById("agentops-chatbot-ab7b7522") as HTMLIFrameElement | null;
+    if (!iframe) return;
+    const onMessage = (event: MessageEvent) => {
+      if (!event.data || event.source !== iframe.contentWindow) return;
+      if (event.data.type !== "agentops-chatbot-state") return;
+      const open = Boolean(event.data.open);
+      iframe.style.width = open ? "400px" : "80px";
+      iframe.style.height = open ? "min(820px, 100dvh)" : "80px";
+    };
+    window.addEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
+  }, []);
 
   return (
-    
+
     <div className="flex flex-col bg-white dark:bg-[#0d1117]">
-<iframe
-  id="agentops-chatbot-ab7b7522"
-  src="https://animator-briskness-canister.ngrok-free.dev/embed/chatbot?org=d7b14163-e1b2-47bd-9c99-225458dc3381"
-  title="Booking assistant"
-  style={{
-    position: "fixed",
-    right: 16,
-    bottom: 16,
-    width: 80,
-    height: 80,
-    maxWidth: "calc(100vw - 32px)",
-    border: 0,
-    background: "transparent",
-    zIndex: 2147483647,
-  }}
-  loading="lazy"
-/>
+      <iframe
+        id="agentops-chatbot-ab7b7522"
+        src="https://animator-briskness-canister.ngrok-free.dev/embed/chatbot?org=d7b14163-e1b2-47bd-9c99-225458dc3381"
+        title="Booking assistant"
+        style={{
+          position: "fixed",
+          right: 16,
+          bottom: 16,
+          width: 80,
+          height: 80,
+          maxWidth: "calc(100vw - 32px)",
+          border: 0,
+          background: "transparent",
+          zIndex: 2147483647,
+        }}
+        loading="lazy"
+      />
       {/* ── 1. Hero ── */}
       <Hero />
 
@@ -452,9 +452,8 @@ useEffect(() => {
                 <button
                   key={s.id}
                   onClick={() => setActiveService(s.id)}
-                  className={`flex items-center gap-2 px-4 py-3 text-sm font-semibold whitespace-nowrap border-b-2 -mb-px transition-all ${
-                    isActive ? `${tabAccent[s.color]}` : 'border-transparent text-slate-400 hover:text-slate-700'
-                  }`}
+                  className={`flex items-center gap-2 px-4 py-3 text-sm font-semibold whitespace-nowrap border-b-2 -mb-px transition-all ${isActive ? `${tabAccent[s.color]}` : 'border-transparent text-slate-400 hover:text-slate-700'
+                    }`}
                 >
                   <SIcon className="h-4 w-4" />
                   {s.label}
@@ -565,6 +564,7 @@ useEffect(() => {
                 >
                   {/* Image */}
                   <div className="relative h-44 overflow-hidden" style={{ backgroundColor: 'var(--color-raised)' }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={item.image}
                       alt={item.client}

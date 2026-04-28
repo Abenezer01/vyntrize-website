@@ -11,11 +11,11 @@ import { isAdminLoggedIn, adminLogout } from '@/lib/admin-auth';
 import VyntriseLogo from '@/components/VyntriseLogo';
 
 const navItems = [
-  { label: 'Dashboard',  href: '/admin/dashboard', icon: LayoutDashboard },
-  { label: 'Leads',      href: '/admin/leads',      icon: Users           },
-  { label: 'Projects',   href: '/admin/projects',   icon: Briefcase       },
-  { label: 'Team',       href: '/admin/team',        icon: UserCircle      },
-  { label: 'Settings',   href: '/admin/settings',   icon: Settings        },
+  { label: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
+  { label: 'Leads', href: '/admin/leads', icon: Users },
+  { label: 'Projects', href: '/admin/projects', icon: Briefcase },
+  { label: 'Team', href: '/admin/team', icon: UserCircle },
+  { label: 'Settings', href: '/admin/settings', icon: Settings },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -25,10 +25,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    if (pathname === '/admin/login') { setChecked(true); return; }
+    if (pathname === '/admin/login') {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setChecked(true);
+      return;
+    }
     if (!isAdminLoggedIn()) {
       router.replace('/admin/login');
     } else {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setChecked(true);
     }
   }, [pathname, router]);
