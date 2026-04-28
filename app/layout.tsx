@@ -4,6 +4,9 @@ import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CookieBanner from '@/components/CookieBanner';
+import CookieConsentProvider from '@/components/CookieConsentProvider';
+import AgentChatbot from '@/components/AgentChatbot';
+import ThemeProvider from '@/components/ThemeProvider';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -22,9 +25,64 @@ const cormorantGaramond = Cormorant_Garamond({
   style: ['normal', 'italic'],
 });
 
+const BASE_URL = 'https://www.vyntrise.com';
+
 export const metadata: Metadata = {
-  title: 'VyntRise - AI-Powered Business Growth',
-  description: 'Transform your business with intelligent automation.',
+  metadataBase: new URL(BASE_URL),
+  title: {
+    default: 'VyntRise — AI-Powered Business Growth',
+    template: '%s | VyntRise',
+  },
+  description:
+    'VyntRise deploys autonomous AI agents that handle your reputation, leads, workflows, and data — 24/7, without a single manual step. Trusted by 500+ businesses.',
+  keywords: [
+    'AI automation', 'business automation', 'reputation management',
+    'AI agents', 'intelligent automation', 'custom software', 'data analytics',
+    'digital marketing', 'small business AI', 'VyntRise',
+  ],
+  authors: [{ name: 'VyntRise', url: BASE_URL }],
+  creator: 'VyntRise',
+  publisher: 'VyntRise Technologies',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: BASE_URL,
+    siteName: 'VyntRise',
+    title: 'VyntRise — AI-Powered Business Growth',
+    description:
+      'Autonomous AI agents that handle your reputation, leads, workflows, and data — 24/7. Trusted by 500+ businesses.',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'VyntRise — AI-Powered Business Growth',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@vyntrise',
+    creator: '@vyntrise',
+    title: 'VyntRise — AI-Powered Business Growth',
+    description:
+      'Autonomous AI agents that handle your reputation, leads, workflows, and data — 24/7.',
+    images: ['/og-image.png'],
+  },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon-16x16.png',
+    apple: '/apple-touch-icon.png',
+  },
+  manifest: '/site.webmanifest',
+  alternates: {
+    canonical: BASE_URL,
+  },
 };
 
 export default function RootLayout({
@@ -33,12 +91,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`scroll-smooth ${inter.variable} ${jetbrainsMono.variable} ${cormorantGaramond.variable}`}>
-      <body className="font-sans bg-white text-slate-900 antialiased flex flex-col min-h-screen">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <CookieBanner />
+    <html lang="en" suppressHydrationWarning className={`scroll-smooth ${inter.variable} ${jetbrainsMono.variable} ${cormorantGaramond.variable}`}>
+      <body className="font-sans antialiased flex flex-col min-h-screen transition-colors duration-200" style={{ backgroundColor: 'var(--color-bg)', color: 'var(--color-text)' }}>
+        <ThemeProvider>
+          <Header />
+          <CookieConsentProvider>
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <CookieBanner />
+            <AgentChatbot />
+          </CookieConsentProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

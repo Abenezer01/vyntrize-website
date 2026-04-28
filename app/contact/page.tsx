@@ -1,12 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Link from 'next/link';
 import { motion } from 'motion/react';
 import {
   ArrowRight, Mail, MessageSquare, Clock, CheckCircle2,
-  Linkedin, Twitter, Github, Search, Bot, Code, Database, Sparkles
+  MapPin, Search, Bot, Code, Database, Sparkles,
 } from 'lucide-react';
+import { saveLead } from '@/lib/leads';
 
 const intents = [
   { id: 'ai-search', label: 'AI Search & Reputation', icon: Search },
@@ -29,9 +30,18 @@ const trust = [
   { value: '14-day', label: 'Free trial on all plans' },
 ];
 
+const emails = [
+  { address: 'hello@vyntrise.com', label: 'General contact' },
+  { address: 'sales@vyntrise.com', label: 'New clients' },
+  { address: 'support@vyntrise.com', label: 'Customer help' },
+  { address: 'info@vyntrise.com', label: 'Business inquiries' },
+  { address: 'billing@vyntrise.com', label: 'Invoices & payments' },
+];
+
 export default function Contact() {
   const [selected, setSelected] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -62,10 +72,10 @@ export default function Contact() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen bg-white dark:bg-[#0d1117]">
 
       {/* Header */}
-      <section className="border-b border-slate-100 bg-slate-50/60 pt-20 pb-12 px-4 md:px-6">
+      <section className="border-b border-slate-100 dark:border-[#21262d] bg-slate-50/60 dark:bg-[#161b22] pt-20 pb-12 px-4 md:px-6">
         <div className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute left-1/2 top-0 -translate-x-1/2 h-[400px] w-[700px] rounded-full bg-[radial-gradient(ellipse_at_top,_#dbeafe_0%,_transparent_70%)] opacity-60 blur-3xl" />
           <div className="absolute inset-0 bg-[radial-gradient(circle,_#94a3b818_1px,_transparent_1px)] bg-[size:28px_28px]" />
@@ -110,7 +120,7 @@ export default function Contact() {
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="p-7 space-y-6">
+                <form onSubmit={handleSubmit} ref={formRef} className="p-7 space-y-6">
                   {/* Intent chips */}
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">
@@ -143,7 +153,7 @@ export default function Contact() {
                     <div className="space-y-1.5">
                       <label htmlFor="firstName" className="text-xs font-semibold text-slate-700">First name</label>
                       <input
-                        type="text" id="firstName" required
+                        type="text" id="firstName" name="firstName" required
                         placeholder="Alex"
                         className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
                       />
@@ -151,7 +161,7 @@ export default function Contact() {
                     <div className="space-y-1.5">
                       <label htmlFor="lastName" className="text-xs font-semibold text-slate-700">Last name</label>
                       <input
-                        type="text" id="lastName" required
+                        type="text" id="lastName" name="lastName" required
                         placeholder="Rivera"
                         className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
                       />
@@ -163,7 +173,7 @@ export default function Contact() {
                     <div className="space-y-1.5">
                       <label htmlFor="email" className="text-xs font-semibold text-slate-700">Work email</label>
                       <input
-                        type="email" id="email" required
+                        type="email" id="email" name="email" required
                         placeholder="alex@company.com"
                         className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
                       />
@@ -171,7 +181,7 @@ export default function Contact() {
                     <div className="space-y-1.5">
                       <label htmlFor="company" className="text-xs font-semibold text-slate-700">Company</label>
                       <input
-                        type="text" id="company"
+                        type="text" id="company" name="company"
                         placeholder="Acme Inc."
                         className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
                       />
@@ -184,7 +194,7 @@ export default function Contact() {
                       What&apos;s your biggest challenge right now?
                     </label>
                     <textarea
-                      id="message" rows={4} required
+                      id="message" name="message" rows={4} required
                       placeholder="Describe what you're trying to solve or build..."
                       className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all resize-none"
                     />
@@ -252,31 +262,46 @@ export default function Contact() {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
               >
-                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4">Prefer direct contact</p>
-                <div className="space-y-3">
-                  <a href="mailto:hello@vyntrise.com" className="flex items-center gap-3 text-sm text-slate-700 hover:text-blue-600 transition-colors group">
-                    <div className="h-8 w-8 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center group-hover:border-blue-200 group-hover:bg-blue-50 transition-colors">
-                      <Mail className="h-4 w-4" />
-                    </div>
-                    hello@vyntrise.com
-                  </a>
-                  <a href="#" className="flex items-center gap-3 text-sm text-slate-700 hover:text-blue-600 transition-colors group">
-                    <div className="h-8 w-8 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center group-hover:border-blue-200 group-hover:bg-blue-50 transition-colors">
-                      <Clock className="h-4 w-4" />
-                    </div>
-                    Book a 30-min call
-                  </a>
-                </div>
-                <div className="mt-5 pt-5 border-t border-slate-100 flex items-center gap-3">
-                  {[Linkedin, Twitter, Github].map((SIcon, i) => (
+                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4">Email us directly</p>
+                <div className="space-y-2.5">
+                  {emails.map((e) => (
                     <a
-                      key={i}
-                      href="#"
-                      className="h-8 w-8 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500 hover:text-blue-600 hover:border-blue-200 hover:bg-blue-50 transition-colors"
+                      key={e.address}
+                      href={`mailto:${e.address}`}
+                      className="flex items-center justify-between gap-3 group rounded-lg px-3 py-2 hover:bg-slate-50 transition-colors"
                     >
-                      <SIcon className="h-4 w-4" />
+                      <div className="flex items-center gap-2.5">
+                        <div className="h-7 w-7 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center group-hover:border-blue-200 group-hover:bg-blue-50 transition-colors shrink-0">
+                          <Mail className="h-3.5 w-3.5 text-slate-400 group-hover:text-blue-600 transition-colors" />
+                        </div>
+                        <span className="text-sm text-slate-700 group-hover:text-blue-600 transition-colors">{e.address}</span>
+                      </div>
+                      <span className="text-[10px] text-slate-400 shrink-0">{e.label}</span>
                     </a>
                   ))}
+                </div>
+              </motion.div>
+
+              {/* Address */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.25 }}
+                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+              >
+                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4">Office address</p>
+                <div className="flex items-start gap-3">
+                  <div className="h-8 w-8 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center shrink-0 mt-0.5">
+                    <MapPin className="h-4 w-4 text-slate-400" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-slate-900 mb-0.5">VyntRise LLC</p>
+                    <p className="text-xs text-slate-500 leading-relaxed">
+                      205 Van Buren Street, Suite 120, #063<br />
+                      Herndon, VA 20170<br />
+                      United States
+                    </p>
+                  </div>
                 </div>
               </motion.div>
 
@@ -284,14 +309,14 @@ export default function Contact() {
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.25 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
                 className="rounded-2xl border border-slate-200 bg-slate-50/60 p-5"
               >
                 <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-3">Business hours</p>
                 <div className="space-y-2">
                   {[
-                    { day: 'Mon – Fri', hours: '9:00 AM – 6:00 PM PST' },
-                    { day: 'Saturday', hours: '10:00 AM – 4:00 PM PST' },
+                    { day: 'Mon – Fri', hours: '9:00 AM – 6:00 PM EST' },
+                    { day: 'Saturday', hours: '10:00 AM – 4:00 PM EST' },
                     { day: 'Sunday', hours: 'Closed' },
                   ].map((r) => (
                     <div key={r.day} className="flex justify-between text-xs">
@@ -301,8 +326,8 @@ export default function Contact() {
                   ))}
                 </div>
                 <div className="mt-3 flex items-center gap-1.5">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="text-[10px] text-emerald-600 font-semibold">Support agents online now</span>
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                  <span className="text-[10px] text-emerald-600 font-semibold">Support available during business hours</span>
                 </div>
               </motion.div>
 
